@@ -1,0 +1,1156 @@
+<div>
+	<div class="custom-tab">
+		<ul class="nav nav-tabs" id="myTab" role="tablist" style="border-bottom: 0px solid #fff;">
+			<li class="nav-item">
+				<a class="nav-link" (click)="onSubmitCOIClick($event)" [class.active]="activeTab === 'home'"
+					id="home-tab" href="javascript:void(0)" role="tab" aria-controls="home"
+					aria-selected="activeTab === 'home'">
+					&nbsp;Submit COI Declaration<sup style="font-size: 12px;">
+						<span id="spnmyrequests"></span></sup></a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" id="mytasks-tab" [class.active]="activeTab === 'profile'" href="javascript:void(0)"
+					role="tab" aria-controls="profile" (click)="onMyTasksClick($event)"
+					aria-selected="activeTab === 'profile'">
+					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; My Pending Approvals<sup
+						style="font-size: 12px;">
+						<span id="spnmytasks"></span></sup></a>
+
+			</li>
+
+
+			<li class="nav-item hide" id="mytasksceo">
+				<a class="nav-link" id="mytasksceo-tab" [class.active]="activeTab === 'ceopending'"
+					href="javascript:void(0)" role="tab" aria-controls="profile" (click)="onCEOTasksClick($event)"
+					aria-selected="activeTab === 'ceopending'">
+					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; CEO Pending Approvals<sup
+						style="font-size: 12px;">
+						<span id="spnmytasksceo"></span></sup></a>
+			</li>
+			<li class="nav-item hide" id="mycompletedtasksceo">
+				<a class="nav-link" id="mycompletedtasksceo-tab" data-toggle="tab" href="#completedceo" role="tab"
+					aria-controls="profile" aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; CEO Completed Approvals<sup
+						style="font-size: 12px;">
+						<span id="spnmytaskscompletedceo"></span></sup></a>
+			</li>
+
+			<li class="nav-item hide" id="mycompletedtasksco">
+				<a class="nav-link" id="mycompletedtasksco-tab" data-toggle="tab" href="#completedco" role="tab"
+					aria-controls="profile" aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; All COI request<sup style="font-size: 12px;">
+						<span id="spnmytaskscompletedco"></span></sup></a>
+			</li>
+
+			<li class="nav-item hide" id="mycompletedtasksstatus">
+				<a class="nav-link" id="mycompletedtasksstatus-tab" data-toggle="tab" href="#completedstatus" role="tab"
+					aria-controls="profile" aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; Declared COI</a>
+			</li>
+
+
+		</ul>
+
+		<div class="tab-content" id="myTabContent">
+
+
+
+			<div *ngIf="activeTab === 'home'" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+				<div class="card p-2">
+
+					<div class="row">
+						<div class="col-md-12">
+							<!--<a href="#"  style="float: left;margin-left: 15px;background-color: #D8CFC6!important;" data-task="/Compliance/Lists/COIHolding/NewForm.aspx" class="button anc_task">COI Declaration Form</a>-->
+							<!-- style="float: left;margin-left: 15px;font-size: 14px!important;" -->
+							<button type="button" class="coibutton" data-toggle="modal" id="MybtnModal"
+								(click)="openModal()">COI Declaration Form</button>
+
+						</div>
+						<div class="col-md-12">
+
+
+
+							<div class="callout-table">
+								<div class="table-responsive mt-3">
+									<table id="tblMyTimeSheet" class="table table-striped table-bordered"
+										cellspacing="0" width="100%">
+										<thead>
+											<tr>
+
+												<th class="no-sort sorting_desc hide">ID</th>
+												<th class="no-sort sorting">Name</th>
+												<th class="no-sort sorting">Status</th>
+												<th class="no-sort sorting desc">Created On</th>
+
+											</tr>
+										</thead>
+
+									</table>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+
+
+
+
+
+				</div>
+			</div>
+
+			<div *ngIf="activeTab === 'profile'" id="profile" role="tabpanel" aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									id="mytasks">
+									<thead>
+										<tr>
+
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div *ngIf="activeTab === 'ceopending'" class="tab-pane fade" id="profileceo" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytasksceotbl">
+									<thead>
+										<tr>
+
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
+
+
+			<!-- <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompleted">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-pane fade" id="completedceo" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedceotbl">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-pane fade" id="completedco" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-2">
+					<label class="card-text">Filter By Opco</label>
+					<select name="ddlopcoMaster" class="form-control" id="ddlopcoMaster">
+						<option value="Holding">Holding</option>
+						<option value="Global Solutions">Global Solutions</option>
+						<option value="Lifestyle">Lifestyle</option>
+						<option value="Retail">Retail</option>
+					</select>
+				</div>
+			</div><br/>					
+			<div class="row">
+				
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedcotbl">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-pane fade" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustbl">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div> -->
+
+
+		</div>
+	</div>
+
+	<div #myModal id="myModal" *ngIf="myModal">
+		<div class="modal-dialog modal-xl">
+			<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title"></h4>
+					<button type="button" class="close" (click)="closeModal()" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+
+				<div class="modal-body">
+					<form [formGroup]="form" (ngSubmit)="onSubmit()">
+						<div class="body_style">
+
+							<div class="panel-body form-horizontal form-group">
+
+
+								<p style="margin-bottom:0cm;text-align:center;line-height:normal;background:white;">
+									<strong><span style="font-size:20px;color:#212529;">Conflict of Interest
+											Guidelines</span></strong>
+								</p>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<p><span
+										style='font-size:14px;line-height:107%;font-family:"Calibri",sans-serif;color:#212529;'>Conflict
+										of Interest (COI) refers to any situation where an employee&rsquo;s personal
+										interest might conflict with the interests of any entity comprising part of the
+										Majid Al Futtaim group of companies (such entity, the
+										&ldquo;<strong>Company</strong>&rdquo;, and such group, the
+										&ldquo;<strong>Group</strong>&rdquo;). This is an unwanted circumstance as it
+										may
+										improperly influence or could be seen as improperly influencing the
+										employee&rsquo;s
+										judgement, decisions, actions and commitment to act, at all times, in the best
+										interests of the Company and the Group. Such unwanted circumstances can also
+										negatively impact the Company&rsquo;s, and consequently, the Group&rsquo;s
+										reputation.</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">
+										The basic principle is that each employee must act in a way which does not and
+										will
+										not adversely affect the reputation, business interests or integrity of the
+										Company
+										or the Group.
+										The employee should not benefit directly or indirectly beyond what is provided
+										to
+										the employee in their employment package.
+									</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">
+										The objective of these guidelines is to ensure transparency by requiring all
+										employees to disclose any and all personal interests with any party having a
+										business relationship with the Group in order to take remedial actions when
+										needed.
+									</span></p>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Definitions</span></strong>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Business
+											Partners&nbsp;</span></strong><span
+										style="font-size:14px;color:#212529;">refer
+										to companies having business relationships with and/or provide products and
+										services
+										to any Company within the Group.</span>
+								</p>
+								<!-- <span
+							 style="color:black;">&nbsp;</span><span style="font-size:14px;color:#212529;">and/or provides products and services to Majid Al Futtaim Holding or any of its Operating Companies including its subsidiaries<strong>.</strong></span> -->
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Employees</span></strong>
+									<span style="font-size:14px;color:#212529;">&nbsp;are defined as all persons who are
+										employed by any Company within the Group on a full-time, part-time, or contract
+										basis.</span>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Family Members or
+											Relatives</span></strong><span
+										style="font-size:14px;color:#212529;">&nbsp;are
+										defined to include spouse, children, grandchildren, parents, grandparents,
+										brothers
+										and sisters (including half-brothers and half-sisters), brothers and
+										sisters-in-law,
+										parents-in-law, children-in-law, uncles, aunts and first cousins of the
+										employee. If
+										any interest is present in a relative or a family member, that interest will be
+										considered to be that of the employee.</span>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">&nbsp;</span></strong>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Scope&nbsp;</span></strong>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">
+										This COI guidelines apply to all Employees and their Family Members in the UAE
+										and
+										all other countries where the Group operates or intends to operate.&nbsp;</span>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Key Principles</span></strong>
+								</p>
+								<ul style="list-style-type: disc;">
+									<li style="list-style-type: disc;"><span style=" font-family:Calibri;">No senior
+											officers or Employees (or their Family Members or Relatives) shall derive
+											any
+											personal profit, gain or benefit, directly or indirectly, by reason of his
+											or
+											her employment with the Group.&nbsp;</span></li>
+									<li style="list-style-type: disc;"><span
+											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">Each
+											Employee shall identify and disclose to the Company any and all personal
+											interests which he or she (or their Family Members or Relatives), directly
+											or
+											indirectly, have with any Business Partner having a relationship with any
+											Company within the Group, including but not limited to contractors,
+											consultants,
+											suppliers, business partners and tenants.</span></li>
+									<li style="list-style-type: disc;"><span
+											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">Any
+											personal/romantic relationships with direct reports, line managers, any
+											other
+											Employees and/or a Business Partner which may be perceived as impairing or
+											adversely affecting an Employee’s judgement to make business decisions
+											objectively must be promptly disclosed for appropriate safeguards to be
+											introduced.</span></li>
+									<li style="list-style-type: disc;"><span
+											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">If
+											an Employee becomes aware of a potential conflict of interest situation, the
+											Employee should immediately notify his/her direct manager and the relevant
+											Company compliance team. Actions may be taken to remove the party from
+											further
+											participation in Majid Al Futtaim-related activities until the conflict of
+											interest is reviewed or a waiver granted and legal advice obtained.</span>
+									</li>
+									<li style="list-style-type: disc;"><span style="font-family:Calibri;">On an annual
+											basis
+											all Employees must complete the below Conflict of Interest Disclosure Form.
+											Employees shall immediately update and resubmit this form, if an
+											individual's
+											financial, business, or employment relationship changes throughout the year
+											and
+											a conflict of interest could exist.</span></li>
+									<li style="list-style-type: disc;"><span
+											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">All
+											conflict of interest disclosures shall be analysed by management and risk
+											mitigation actions be implemented to protect the Company and the concerned
+											Employee, where needed.</span></li>
+								</ul>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Gifts, Hospitality and
+											Entertainment</span></strong>
+								</p>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<ul style="list-style-type: disc;">
+									<li style="list-style-type: disc;"><span style="font-family:Calibri;">There are
+											situations involving an exchange of Gifts, Hospitality and Entertainment
+											(GHE),
+											which can be perceived as a conflict of interest. GHE must be carried out in
+											full compliance with Majid Al Futtaim&nbsp;</span>
+										<span style="color:black;">
+											<a
+												href="https://www.majidalfuttaim.com/-/media/feature/mafcorporate/about/policy/ghe-policyv21final.pdf"><span
+													style="font-family:Calibri;">GHE Policy</span></a>
+										</span><span style="font-family:Calibri;">.</span>
+									</li>
+									<li style="list-style-type: disc;"><span style="font-family:Calibri;">If you
+											haven&rsquo;t registered GHE received using the&nbsp;</span><span
+											style="color:black;"><a href="https://mafportal.maf.ae/portal/ghe">GHE
+												tool</a></span>
+										<span style="font-family:Calibri;">, please use the below Conflict of Interest
+											Disclosure Form to disclose them.</span>
+									</li>
+								</ul>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">&nbsp;</span></strong>
+								</p>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Examples of non-allowable gifts,
+											benefits or relationships</span></strong>
+								</p>
+								<ul type="disc">
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Cash
+											payments</span>
+									</li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Travel tickets
+											and/or
+											trips, both local and international</span></li>
+									<li style="list-style-type: disc;"><span
+											style="font-size:14px;">Accommodations</span>
+									</li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Vacations</span>
+									</li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Tickets to musical
+											or
+											sporting events (unless such tickets are provided to the Company as part of
+											a
+											sponsorship program by the Company)</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Lavish meals
+											exceeding
+											the limit specified below</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Heavily discounted
+											or
+											free products and services from any Business Partner</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Direct and indirect
+											sponsorship of social, philanthropist and sporting events for self, family
+											members and/or team</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Expensive
+											promotional
+											items (exceeding allowable monetary limit)</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Providing
+											consulting
+											services to any Business Partners&nbsp;</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Promise of future
+											employment by any Business Partner (for self or Family Members or
+											Relatives)</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Being a salaried
+											employee or receiving any form or compensation (monetary or otherwise) from
+											any
+											person or entity outside the Group</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Director or board
+											member position in a company that is in direct competition with any of the
+											Group
+											entities.</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Employment of
+											Family
+											Members or Relatives by any Business Partner</span></li>
+								</ul>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Potential conflict of interest
+											requiring special approval&nbsp;</span></strong>
+								</p>
+								<ul type="disc">
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Employment of
+											Family
+											Members or Relatives within the Group</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Serving on the
+											Board of
+											Directors or advisory committees of any company that is NOT in direct
+											competition with the Company or Group</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Personal investment
+											in
+											any Business Partner or companies in direct competition with any Group
+											entity</span></li>
+								</ul>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Samples of allowable gifts or
+											benefits:</span></strong>
+								</p>
+								<ul type="disc">
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Business meals (not
+											to
+											exceed AED 2,000 in total cumulative value per annum or the lower threshold
+											set
+											by your OpCo & country of operation from a single source)</span></li>
+									<li style="list-style-type: disc;"><span style="font-size:14px;">Promotional items
+											(not
+											to exceed AED 500 in total cumulative value per annum or the lower threshold
+											set
+											by your OpCo & country of operation from a single source)</span></li>
+								</ul>
+								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:14px;color:#212529;">Compliance with the
+											Guidelines:</span></strong>
+								</p>
+
+								<ul style="list-style-type: disc;">
+									<li style="list-style-type: disc;"><span style="font-family:Calibri;">
+											Compliance with the COI guidelines is mandatory. Employees are ultimately
+											accountable to fully disclose any potential or actual conflict of interest.
+											The
+											existence of any actual or potential conflict of interest is not a
+											violation by itself. Failure to timely disclose is considered a violation
+											and
+											could lead to disciplinary actions including termination.</span></li>
+								</ul>
+								<p><span style="font-size:14px;line-height:107%;color:#212529;">&nbsp;</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+									<strong><span style="font-size:15px;color:#212529;">I declare that I have read and
+											fully
+											understood the contents of this document. I agree to the above guidelines
+											and
+											confirm that I will disclose all my relationships with any person or entity
+											that
+											has a business relationship with any Group entity, including, without
+											limitation, all gifts and benefits received from those parties (not
+											disclosed
+											through GHE tool) using the below Annual Conflict of Interest Disclosure
+											form.</span></strong>
+								</p>
+								<br />
+								<div class="btnAgree" style="text-align: right; padding-right:60px ;">
+									<label class="radio-inline" style="padding:5px;">
+										<input type="radio" formControlName="radioAgreement" value="Yes"> Yes
+									</label>
+									<label class="radio-inline" style="padding:5px;">
+										<input type="radio" formControlName="radioAgreement" value="No">No</label>
+								</div>
+								<br />
+								<br />
+								<p style="margin-bottom:7.5pt;text-align:center;line-height:normal;background:white;">
+									<strong><span style="font-size:16px;color:#212529;">Annual Conflict of Interest
+											Disclosure Form</span></strong>
+								</p>
+								<p style="margin-bottom:7.5pt;text-align:center;line-height:normal;background:white;">
+									<strong><span
+											style="font-size:14px;color:#212529;">Instructions:</span></strong><span
+										style="font-size:14px;color:#212529;">&nbsp;Complete the form and submit it on
+										or
+										before 31 March 2023 Should you have any questions concerning the information
+										required by this form, please reach out to your respective Company compliance
+										team.</span>
+								</p>
+								<p style="margin-bottom:0cm;line-height:normal;background:white;"><span
+										style="font-size:14px;color:#212529;">&nbsp;</span></p>
+								<div class="panel-body form-horizontal form-group" style="padding: 10px 20px;">
+									<div formGroupName="employeeDetails" *ngIf="readOnly">
+										<div class="row">
+
+											<div class="col-md-4">
+												<b>Employee Name</b>
+												<input type="text" id="txtEmpName" formControlName="EmpName"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+
+											<div class="col-md-4">
+												<b>Employee Number</b>
+												<input type="text" id="txtEmpNumber" formControlName="EmpNumber"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+											<div class="col-md-4">
+												<b>Designation</b>
+												<input type="text" id="txtDesignation" formControlName="Designation"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+										</div>
+										<div class="row">
+
+											<div class="col-md-4">
+												<b>Department</b>
+												<input type="text" id="txtDepartment" formControlName="Department"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+
+											<div class="col-md-4">
+												<b>Manager Name</b>
+												<input type="text" id="txtMgrName" formControlName="MgrName"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+											<div class="col-md-4">
+												<b>Manager Email</b>
+												<input type="text" id="txtMgrEmail" formControlName="MgrEmail"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+										</div>
+										<div class="row">
+
+											<div class="col-md-4">
+												<b>Division</b>
+												<input type="text" id="txtDivision" formControlName="Division"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+
+											<div class="col-md-4">
+												<b>Company</b>
+												<input type="text" id="txtCompany" formControlName="Company"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
+										</div>
+									</div>
+									<br />
+
+									<br />
+									<p style="margin-bottom:0cm;line-height:normal;background:white;"><span
+											style="font-size:14px;color:#212529;">&nbsp;</span></p>
+
+									<div class="row" formGroupName="question1">
+										<div class="col-md-10">
+											<b> a. Are you in a position that provides you with authority to influence
+												business decisions related to operations of a MAF Group entity? </b>
+										</div>
+
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1a" value="Yes"> Yes
+											</label>
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1a" value="No">No </label>
+
+										</div>
+
+										<div class="col-md-12 radio1ayes"
+											*ngIf="form.get('question1.radio1a')?.value === 'Yes'">
+											<textarea id="txtOther" formControlName="radio1aDetails" name="txtQ1a"
+												class="form-control txtQ1a" rows="5" [readonly]="readOnly"></textarea>
+										</div>
+
+									</div>
+									<br />
+									<div class="row" formGroupName="question2">
+										<div class="col-md-10">
+											<b>b. As far as you are aware, have you or any of your Family Members or
+												Relatives ever received and/or accepted beneﬁts, products and services
+												from
+												any Business Partner including contractors, consultants, suppliers,
+												tenants
+												or other persons, or companies that have a business relationship with
+												any
+												MAF Group entity? </b>
+										</div>
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1b" value="Yes"> Yes
+											</label>
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1b" value="No">No </label>
+										</div>
+
+										<div class="row radio1byes"
+											*ngIf="form.get('question2.radio1b')?.value === 'Yes'">
+											<div class="col-md-12" formArrayName="radio1bDetails">
+												<table class="coitable">
+													<thead>
+														<tr>
+															<th>Company Name</th>
+															<th>Company Relationship with the Group</th>
+															<th>Gift/Benefit Received</th>
+															<th>Date (dd/mm/yyyy)</th>
+															<th>Value</th>
+															<th>Remarks</th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr *ngFor="let detail of radio1bDetails.controls; let i = index"
+															[formGroupName]="i">
+															<td><input type="text" formControlName="qbname"
+																	class="form-control" [readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qbrelation"
+																	class="form-control" [readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qbbenifit"
+																	class="form-control" [readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qbdate"
+																	class="form-control" [readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qbvalue"
+																	class="form-control" [readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qbremarks"
+																	class="form-control" [readonly]="readOnly"></td>
+															<td><button type="button" (click)="removeRowqb(i)"
+																	*ngIf="!readOnly">Remove</button></td>
+														</tr>
+													</tbody>
+												</table>
+												<button type="button" (click)="addRowqb()" *ngIf="!readOnly">Add
+													Row</button>
+											</div>
+										</div>
+									</div>
+									<br />
+									<div class="row" formGroupName="question3">
+										<div class="col-md-10">
+											<b>
+												c. As far as you are aware, have you, or has any of your Family Members
+												or
+												Relatives, been involved in any business or non-business relationships
+												with
+												any Business Partner that provides products or services to any MAF Group
+												entity (including holding a position in, or participating in management
+												activities, provide advisory or consultation to, any such company)?
+											</b>
+										</div>
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1c" value="Yes"> Yes
+											</label>
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1c" value="No">No </label>
+										</div>
+
+
+										<div class="row radio1cyes"
+											*ngIf="form.get('question3.radio1c')?.value === 'Yes'">
+											<div class="col-md-12" formArrayName="radio1cDetails">
+												<table class="coitable">
+													<thead>
+														<tr>
+															<th>Company Name</th>
+															<th>Company Relationship with the Group</th>
+															<th>Your or your family&rsquo;s or Relaives&rsquo;s
+																relationship
+																with the company</th>
+															<th>Date in which relation started (dd/mm/yyyy)</th>
+															<th>Provide clarification of why, or why not, the nature of
+																the
+																relation can be considered a conflict of interest</th>
+
+														</tr>
+													</thead>
+													<tbody *ngFor="let detail of radio1cDetails.controls; let i = index"
+														[formGroupName]="i">
+														<tr>
+															<td><input type="text" formControlName="qcname"></td>
+															<td><input type="text" formControlName="qcrelation"></td>
+															<td><input type="text" formControlName="qccomprelation">
+															</td>
+															<td><input type="text" formControlName="qcdate"></td>
+															<td><input type="text" formControlName="qcclarifictaion">
+															</td>
+															<td><button type="button" (click)="removeRowqc(i)"
+																	*ngIf="!readOnly">Remove</button></td>
+														</tr>
+													</tbody>
+												</table>
+												<button type="button" (click)="addRowqc()" *ngIf="!readOnly">Add
+													Row</button>
+											</div>
+										</div>
+									</div>
+									<br />
+									<div class="row" formGroupName="question4">
+										<div class="col-md-10">
+											<b>d. Are you or any of your Family Members or Relatives on an advisory
+												committee or a board member of any company or organization that provides
+												any
+												services or products to any MAF Group entity? </b>
+										</div>
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio1d" value="Yes"> Yes
+											</label>
+											<label class="radio-inline "><input type="radio" formControlName="radio1d"
+													value="No">No </label>
+										</div>
+
+
+										<div class="row radio1dyes"
+											*ngIf="form.get('question4.radio1d')?.value === 'Yes'">
+											<div class="col-md-12" formArrayName="radio1dDetails">
+												<table class="coitable">
+													<thead>
+														<tr>
+															<th>Company Name</th>
+															<th>Company Relationship with Group;</th>
+															<th>Your relationship with the company</th>
+															<th>Date in which your relation started (dd/mm/yyyy)</th>
+															<th>Provide details of Group&rsquo;s approval of such board
+																or
+																advisory committee membership</th>
+														</tr>
+													</thead>
+													<tbody *ngFor="let detail of radio1dDetails.controls; let i = index"
+														[formGroupName]="i">
+														<tr>
+															<td><input type="text" formControlName="qdname"></td>
+															<td><input type="text" formControlName="qdrelation"></td>
+															<td><input type="text" formControlName="qdcomprelation">
+															</td>
+															<td><input type="text" formControlName="qddate"></td>
+															<td><input type="text" formControlName="qddetails"></td>
+															<td><button type="button" (click)="removeRowqd(i)"
+																	*ngIf="!readOnly">Remove</button></td>
+														</tr>
+													</tbody>
+
+
+												</table>
+												<button type="button" (click)="addRowqd()" *ngIf="!readOnly">Add
+													Row</button>
+											</div>
+										</div>
+									</div>
+									<br />
+
+									<div class="row" formGroupName="question5">
+										<div class="col-md-10">
+											<b>
+												e. Have you or any of your Family Members or Relatives accepted or
+												received
+												any personal travel tickets, sponsorships, products and services or any
+												other gifts, hospitality, entertainments, beneﬁts, compensation or
+												professional services from any person, company or organization that has
+												either a direct or indirect business relationship with any MAF Group
+												entity
+												and you have NOT registered such receipt in the GHE tool?
+											</b>
+										</div>
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2e" value="Yes"> Yes
+											</label>
+											<label class="radio-inline "><input type="radio" formControlName="radio2e"
+													value="No">No </label>
+
+										</div>
+
+										<div class="row radio2eyes"
+											*ngIf="form.get('question5.radio2e')?.value === 'Yes'">
+											<div class="col-md-12" formArrayName="radio2eDetails">
+												<table class="coitable">
+													<thead>
+														<tr>
+															<th>Company</th>
+															<th>Company Relationship with the Group</th>
+															<th>Gift/Benefit Received</th>
+															<th>Date (dd/mm/yyyy)</th>
+															<th>Value</th>
+															<th>Remarks</th>
+														</tr>
+													</thead>
+													<tbody *ngFor="let detail of radio2eDetails.controls; let i = index"
+														[formGroupName]="i">
+														<tr>
+															<td><input type="text" formControlName="qecompany"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qerelation"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qebenifit"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qedate"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qevalue"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qeremarks"
+																	[readonly]="readOnly"></td>
+															<td><button type="button" (click)="removeRowqe(i)"
+																	*ngIf="!readOnly">Remove</button></td>
+														</tr>
+
+													</tbody>
+												</table>
+												<button type="button" (click)="addRowqe()" *ngIf="!readOnly">Add
+													Row</button>
+											</div>
+										</div>
+									</div>
+									<br />
+
+									<div class="row" formGroupName="question6">
+										<div class="col-md-10">
+											<b>f. Have you provided any person or a company which has a direct
+												relationship
+												with any Group entity with any services (e.g. consulting)? </b>
+										</div>
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2f" value="Yes"> Yes
+											</label>
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2f" value="No">No </label>
+										</div>
+
+
+										<div class="row radio2fyes"
+											*ngIf="form.get('question6.radio2f')?.value === 'Yes'">
+											<div class="col-md-12" formArrayName="radio2fDetails">
+												<table class="coitable">
+													<thead>
+														<tr>
+															<th>Company</th>
+															<th>Company Relationship with Majid Al Futtaim</th>
+															<th>Nature of the service provided</th>
+															<th>Date</th>
+															<th>Provide clarification of why, or why not, the nature of
+																the
+																relation can be considered a conflict of interest</th>
+
+														</tr>
+													</thead>
+													<tbody *ngFor="let detail of radio2fDetails.controls; let i = index"
+														[formGroupName]="i">
+														<tr>
+															<td><input type="text" formControlName="qfcompany"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qfcomprelation"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qfservice"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qfdate"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qfclarification"
+																	[readonly]="readOnly"></td>
+															<td><button type="button" (click)="removeRowqf(i)"
+																	*ngIf="!readOnly">Remove</button></td>
+														</tr>
+
+													</tbody>
+												</table>
+												<button type="button" (click)="addRowqf()" *ngIf="!readOnly">Add
+													Row</button>
+											</div>
+										</div>
+									</div>
+									<br />
+
+									<div class="row" formGroupName="question7">
+										<div class="col-md-10">
+											<b>g. Are any of your Family Members or Relatives employed by any MAF Group
+												entity? </b>
+										</div>
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2g" value="Yes"> Yes
+											</label>
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2g" value="No">No </label>
+										</div>
+
+
+										<div class="row radio2gyes"
+											*ngIf="form.get('question7.radio2g')?.value === 'Yes'">
+											<div class="col-md-12" formArrayName="radio2gDetails">
+												<table class="coitable">
+													<thead>
+														<tr>
+															<th>Name of family member</th>
+															<th>Position Held at Majid Al Futtaim</th>
+															<th>Family Member Operating Company</th>
+															<th>Relationship with you (son, spouse, etc..)</th>
+															<th>Has this been previously disclosed and approved</th>
+															<th>Provide clarification of why, or why not, such
+																employment can be considered a conflict of interest</th>
+														</tr>
+													</thead>
+													<tbody *ngFor="let detail of radio2gDetails.controls; let i = index"
+														[formGroupName]="i">
+														<tr>
+															<td><input type="text" formControlName="qgname"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qgposition"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qgcompany"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qgrelation"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qgapproved"
+																	[readonly]="readOnly"></td>
+															<td><input type="text" formControlName="qgclarification"
+																	[readonly]="readOnly"></td>
+															<td><button type="button" *ngIf="!readOnly"
+																	(click)="removeRowqg(i)">Remove</button></td>
+														</tr>
+
+													</tbody>
+												</table>
+												<button type="button" *ngIf="!readOnly" (click)="addRowqg()">Add
+													Row</button>
+											</div>
+										</div>
+									</div>
+									<br />
+									<div class="row" formGroupName="question8">
+										<div class="col-md-10">
+											<b>h. Are you aware of any other potential conﬂict of interest that has not
+												been disclosed? If yes, please provide details. </b>
+										</div>
+
+										<div class="col-md-2 radio has-success">
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2h" value="Yes"> Yes
+											</label>
+											<label class="radio-inline ">
+												<input type="radio" formControlName="radio2h" value="No">No </label>
+
+										</div>
+
+
+
+										<div class="col-md-12 radio2hyes"
+											*ngIf="form.get('question8.radio2h')?.value === 'Yes'">
+											<textarea id="txtOther" name="txtQ2h" formControlName="radio2hDetails"
+												class="form-control txtQ2h" rows="5" [readonly]="readOnly"></textarea>
+										</div>
+
+									</div>
+									<br />
+									<div formGroupName="comments" class="row"
+										style="border: 1px solid #ccc!important; border-radius: 4px; " *ngIf="readOnly">
+										<div class="col-md-12 comments" *ngIf="txtLMCommentsyes">
+											<label class="labelComments">Line Manager Comments</label>
+											<textarea id="txtLMComments1" name="txtLMComments"
+												formControlName="LMComments" class="txtLMComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf="txtDHCommentsyes">
+											<!-- <label class="labelComments">Department Head Comments</label> -->
+											<label class="labelComments" id="lblLevel2"> {{ lblLevel2Text }}</label>
+											<textarea id="txtDHComments1" name="txtDHComments"
+												formControlName="DHComments" class="txtDHComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf=" txtRACCommentsyes">
+											<label class="labelComments">Compliance Comments</label>
+											<textarea id="txtRACComments1" name="txtRACComments"
+												formControlName="RACComments" class="txtRACComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf=" txtOPCOHCommentsyes">
+											<label class="labelComments" id="lblLevel3"> {{ lblLevel3Text }}</label>
+											<textarea id="txtOPCOHComments1" name="txtOPCOHComments"
+												formControlName="OPCOHComments" class="txtOPCOHComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf=" txtOPCOCHCommentsyes">
+											<label class="labelComments" id="lblLevel4">{{ lblLevel4Text}} </label>
+											<textarea name="txtOPCOCHComments" formControlName="OPCOCHComments"
+												class="txtOPCOCHComments clstxtComments" rows="5" readonly></textarea>
+										</div>
+
+									</div>
+									<br />
+									<div class="row" *ngIf="!readOnly">
+										<div class="col-md-12">
+											<label class="card-text">if you have any supporting documents please attach
+												here</label>
+											<br />
+											<input type="file" name="chooseFile" id="req_chooseFile"
+												class="chooseFile isreadyonlyfieldAll" (change)="onFileSelected($event)"
+												data-choice="req_chooseFile" [disabled]="readOnly">
+
+										</div>
+									</div>
+									<div class="row" *ngIf="readOnly">
+										<div class="col-md-6 col-lg-6">
+											<label class="card-text">Uploaded Documents</label>
+
+											<ul class="input_fields_wrap" id="input_fields">
+												<li *ngFor="let attachment of attachments">
+													<a class="link-icon"
+														[href]="getFullUrl(attachment.ServerRelativeUrl)"
+														target="_blank">
+														<i class="fa fa-paperclip" aria-hidden="true"></i>{{
+														attachment.FileName }}
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+
+								</div>
+
+							</div>
+
+							<div class="panel-body form-horizontal form-group">
+								<div class="row submityes">
+									<div class="col-md-6">
+									</div>
+									<div class="col-md-6">
+										<input type="button" class="btnsubmit close" data-dismiss="modal"
+											(click)="closeModal()" value="Close" />
+										<input type="button" class="btnsubmit" *ngIf="readOnly" id="btnResubmit"
+											value="Re-submit the new COI" (click)="fn_resubmit()" />
+										<input type="submit" *ngIf="!readOnly" value="Submit" class="btnsubmit" />
+										<!-- <input type="button" class="btnsubmit" value="Submit" onclick="fn_submit()" /> -->
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</form>
+				</div>
+
+			</div>
+
+		</div>
+	</div>
+	<router-outlet></router-outlet>
+</div>

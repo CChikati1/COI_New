@@ -1,0 +1,594 @@
+<div class="container taskform" style="padding:0px!important;">
+
+    <div class="body_style">
+        <div class="panel-body form-horizontal form-group" style="background-color: rgb(66, 45, 2)!important;">
+            <div class="row">
+                <div class="col-md-offset-1 col-md-12 header-title" style="color: white;">
+                    Conflict of Interest
+                </div>
+            </div>
+
+        </div>
+        <div class="panel-body form-horizontal form-group" style="padding: 10px 20px;">
+            <br>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <b>Annual Conflict of Interest Disclosure Form</b>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                    <b>Instructions: </b>Complete the form and submit it on or before Oct 18, 2023. Should you have any
+                    questions concerning the information required by this form, please reach out to your respective
+                    Company compliance team.
+
+                </div>
+            </div>
+            <br />
+            <form [formGroup]="empForm">
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <b>Employee Name</b>
+                        <input type="text" id="txtEmpName" formControlName="EmpName" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+
+                    <div class="col-md-4">
+                        <b>Employee Number</b>
+                        <input type="text" id="txtEmpNumber" formControlName="EmpNumber" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <b>Designation</b>
+                        <input type="text" id="txtDesignation" formControlName="Designation" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <b>Department</b>
+                        <input type="text" id="txtDepartment" formControlName="Department" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+
+                    <div class="col-md-4">
+                        <b>Manager Name</b>
+                        <input type="text" id="txtMgrName" formControlName="MgrName" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+                    <div class="col-md-4">
+                        <b>Manager Email</b>
+                        <input type="text" id="txtMgrEmail" formControlName="MgrEmail" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-4">
+                        <b>Division</b>
+                        <input type="text" id="txtDivision" formControlName="Division" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+
+                    <div class="col-md-4">
+                        <b>Company</b>
+                        <input type="text" id="txtCompany" formControlName="Company" class="form-control"
+                            style="height: 30px;" readonly />
+                    </div>
+                </div>
+                <br />
+            </form>
+
+            <div class="modal-body">
+                <div class="body_style">
+
+                    <!-- <div class="panel-body form-horizontal form-group"> -->
+                        <form [formGroup]="form">
+
+                            <p style="margin-bottom:0cm;line-height:normal;background:white;"><span
+                                    style="font-size:14px;color:#212529;">&nbsp;</span></p>
+
+                            <div class="row" formGroupName="question1">
+                                <div class="col-md-10">
+                                    <b> a. Are you in a position that provides you with authority to influence
+                                        business decisions related to operations of a MAF Group entity? </b>
+                                </div>
+
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1a" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1a" value="No">No </label>
+
+                                </div>
+
+                                <div class="col-md-12 radio1ayes"
+                                    *ngIf="form.get('question1.radio1a')?.value === 'Yes'">
+                                    <textarea id="txtOther" formControlName="radio1aDetails" name="txtQ1a"
+                                        class="form-control txtQ1a" rows="5" [readonly]="readOnly"></textarea>
+                                </div>
+
+                            </div>
+                            <br />
+                            <div class="row" formGroupName="question2">
+                                <div class="col-md-10">
+                                    <b>b. As far as you are aware, have you or any of your Family Members or
+                                        Relatives ever received and/or accepted beneﬁts, products and services from
+                                        any Business Partner including contractors, consultants, suppliers, tenants
+                                        or other persons, or companies that have a business relationship with any
+                                        MAF Group entity? </b>
+                                </div>
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1b" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1b" value="No">No </label>
+                                </div>
+
+                                <div class="row radio1byes" *ngIf="form.get('question2.radio1b')?.value === 'Yes'">
+                                    <div class="col-md-12" formArrayName="radio1bDetails">
+                                        <table class="coitable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Company Name</th>
+                                                    <th>Company Relationship with the Group</th>
+                                                    <th>Gift/Benefit Received</th>
+                                                    <th>Date (dd/mm/yyyy)</th>
+                                                    <th>Value</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let detail of radio1bDetails.controls; let i = index"
+                                                    [formGroupName]="i">
+                                                    <td><input type="text" formControlName="qbname" class="form-control"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qbrelation"
+                                                            class="form-control" [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qbbenifit"
+                                                            class="form-control" [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qbdate" class="form-control"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qbvalue"
+                                                            class="form-control" [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qbremarks"
+                                                            class="form-control" [readonly]="readOnly"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row" formGroupName="question3">
+                                <div class="col-md-10">
+                                    <b>
+                                        c. As far as you are aware, have you, or has any of your Family Members or
+                                        Relatives, been involved in any business or non-business relationships with
+                                        any Business Partner that provides products or services to any MAF Group
+                                        entity (including holding a position in, or participating in management
+                                        activities, provide advisory or consultation to, any such company)?
+                                    </b>
+                                </div>
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1c" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1c" value="No">No </label>
+                                </div>
+
+
+                                <div class="row radio1cyes" *ngIf="form.get('question3.radio1c')?.value === 'Yes'">
+                                    <div class="col-md-12" formArrayName="radio1cDetails">
+                                        <table class="coitable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Company Name</th>
+                                                    <th>Company Relationship with the Group</th>
+                                                    <th>Your or your family&rsquo;s or Relaives&rsquo;s relationship
+                                                        with the company</th>
+                                                    <th>Date in which relation started (dd/mm/yyyy)</th>
+                                                    <th>Provide clarification of why, or why not, the nature of the
+                                                        relation can be considered a conflict of interest</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let detail of radio1cDetails.controls; let i = index"
+                                                [formGroupName]="i">
+                                                <tr>
+                                                    <td><input type="text" formControlName="qcname"></td>
+                                                    <td><input type="text" formControlName="qcrelation"></td>
+                                                    <td><input type="text" formControlName="qccomprelation"></td>
+                                                    <td><input type="text" formControlName="qcdate"></td>
+                                                    <td><input type="text" formControlName="qcclarifictaion"></td>
+
+                                                </tr>
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row" formGroupName="question4">
+                                <div class="col-md-10">
+                                    <b>d. Are you or any of your Family Members or Relatives on an advisory
+                                        committee or a board member of any company or organization that provides any
+                                        services or products to any MAF Group entity? </b>
+                                </div>
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio1d" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline "><input type="radio" formControlName="radio1d"
+                                            value="No">No </label>
+                                </div>
+
+
+                                <div class="row radio1dyes" *ngIf="form.get('question4.radio1d')?.value === 'Yes'">
+                                    <div class="col-md-12" formArrayName="radio1dDetails">
+                                        <table class="coitable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Company Name</th>
+                                                    <th>Company Relationship with Group;</th>
+                                                    <th>Your relationship with the company</th>
+                                                    <th>Date in which your relation started (dd/mm/yyyy)</th>
+                                                    <th>Provide details of Group&rsquo;s approval of such board or
+                                                        advisory committee membership</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let detail of radio1dDetails.controls; let i = index"
+                                                [formGroupName]="i">
+                                                <tr>
+                                                    <td><input type="text" formControlName="qdname"></td>
+                                                    <td><input type="text" formControlName="qdrelation"></td>
+                                                    <td><input type="text" formControlName="qdcomprelation"></td>
+                                                    <td><input type="text" formControlName="qddate"></td>
+                                                    <td><input type="text" formControlName="qddetails"></td>
+
+                                                </tr>
+                                            </tbody>
+
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row" formGroupName="question5">
+                                <div class="col-md-10">
+                                    <b>
+                                        e. Have you or any of your Family Members or Relatives accepted or received
+                                        any personal travel tickets, sponsorships, products and services or any
+                                        other gifts, hospitality, entertainments, beneﬁts, compensation or
+                                        professional services from any person, company or organization that has
+                                        either a direct or indirect business relationship with any MAF Group entity
+                                        and you have NOT registered such receipt in the GHE tool?
+                                    </b>
+                                </div>
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2e" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline "><input type="radio" formControlName="radio2e"
+                                            value="No">No </label>
+
+                                </div>
+
+                                <div class="row radio2eyes" *ngIf="form.get('question5.radio2e')?.value === 'Yes'">
+                                    <div class="col-md-12" formArrayName="radio2eDetails">
+                                        <table class="coitable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Company</th>
+                                                    <th>Company Relationship with the Group</th>
+                                                    <th>Gift/Benefit Received</th>
+                                                    <th>Date (dd/mm/yyyy)</th>
+                                                    <th>Value</th>
+                                                    <th>Remarks</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let detail of radio2eDetails.controls; let i = index"
+                                                [formGroupName]="i">
+                                                <tr>
+                                                    <td><input type="text" formControlName="qecompany"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qerelation"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qebenifit"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qedate"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qevalue"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qeremarks"
+                                                            [readonly]="readOnly"></td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row" formGroupName="question6">
+                                <div class="col-md-10">
+                                    <b>f. Have you provided any person or a company which has a direct relationship
+                                        with any Group entity with any services (e.g. consulting)? </b>
+                                </div>
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2f" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2f" value="No">No </label>
+                                </div>
+
+
+                                <div class="row radio2fyes" *ngIf="form.get('question6.radio2f')?.value === 'Yes'">
+                                    <div class="col-md-12" formArrayName="radio2fDetails">
+                                        <table class="coitable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Company</th>
+                                                    <th>Company Relationship with Majid Al Futtaim</th>
+                                                    <th>Nature of the service provided</th>
+                                                    <th>Date</th>
+                                                    <th>Provide clarification of why, or why not, the nature of the
+                                                        relation can be considered a conflict of interest</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let detail of radio2fDetails.controls; let i = index"
+                                                [formGroupName]="i">
+                                                <tr>
+                                                    <td><input type="text" formControlName="qfcompany"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qfcomprelation"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qfservice"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qfdate"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qfclarification"
+                                                            [readonly]="readOnly"></td>
+
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row" formGroupName="question7">
+                                <div class="col-md-10">
+                                    <b>g. Are any of your Family Members or Relatives employed by any MAF Group entity?
+                                    </b>
+                                </div>
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2g" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2g" value="No">No </label>
+                                </div>
+
+
+                                <div class="row radio2gyes" *ngIf="form.get('question7.radio2g')?.value === 'Yes'">
+                                    <div class="col-md-12" formArrayName="radio2gDetails">
+                                        <table class="coitable">
+                                            <thead>
+                                                <tr>
+                                                    <th>Name of family member</th>
+                                                    <th>Position Held at Majid Al Futtaim</th>
+                                                    <th>Family Member Operating Company</th>
+                                                    <th>Relationship with you (son, spouse, etc..)</th>
+                                                    <th>Has this been previously disclosed and approved</th>
+                                                    <th>Provide clarification of why, or why not, such employment can be
+                                                        considered a conflict of interest</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody *ngFor="let detail of radio2gDetails.controls; let i = index"
+                                                [formGroupName]="i">
+                                                <tr>
+                                                    <td><input type="text" formControlName="qgname"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qgposition"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qgcompany"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qgrelation"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qgapproved"
+                                                            [readonly]="readOnly"></td>
+                                                    <td><input type="text" formControlName="qgclarification"
+                                                            [readonly]="readOnly"></td>
+                                                </tr>
+
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="row" formGroupName="question8">
+                                <div class="col-md-10">
+                                    <b>h. Are you aware of any other potential conﬂict of interest that has not been
+                                        disclosed? If yes, please provide details. </b>
+                                </div>
+
+                                <div class="col-md-2 radio has-success">
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2h" value="Yes"> Yes
+                                    </label>
+                                    <label class="radio-inline ">
+                                        <input type="radio" formControlName="radio2h" value="No">No </label>
+
+                                </div>
+
+
+
+                                <div class="col-md-12 radio2hyes"
+                                    *ngIf="form.get('question8.radio2h')?.value === 'Yes'">
+                                    <textarea id="txtOther" name="txtQ2h" formControlName="radio2hDetails"
+                                        class="form-control txtQ2h" rows="5" [readonly]="readOnly"></textarea>
+                                </div>
+
+                            </div>
+
+                        </form>
+                    <!-- </div> -->
+                    <div class="row">
+                        <div class="col-md-10 col-xs-10">
+                            <b>Affirmation:</b>
+                        </div>
+                        <div class="col-md-10 col-xs-10">
+                            <b>In submitting this form, I aﬃrm that the above information is true, correct and
+                                complete to the best of my knowledge.</b>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row" style="border: 1px solid #ccc!important; border-radius: 4px; ">
+                        <div class="col-md-12 comments" *ngIf="txtLMCommentsyes">
+                            <label class="labelComments">Line Manager Comments</label>
+                            <textarea id="txtLMComments1" name="txtLMComments" [(ngModel)]="txtLMComments"
+                                class="txtLMComments clstxtComments" rows="5" readonly></textarea>
+                        </div>
+                        <div class="col-md-12 comments" *ngIf="txtDHCommentsyes">
+                            <!-- <label class="labelComments">Department Head Comments</label> -->
+                            <label class="labelComments" id="lblLevel2">{{ lblLevel2Text }}</label>
+                            <textarea id="txtDHComments1" name="txtDHComments" [(ngModel)]="txtDHComments"
+                                class="txtDHComments clstxtComments" rows="5" readonly></textarea>
+                        </div>
+                        <div class="col-md-12 comments" *ngIf=" txtRACCommentsyes">
+                            <label class="labelComments">Compliance Comments</label>
+                            <textarea id="txtRACComments1" name="txtRACComments" [(ngModel)]="txtRACComments"
+                                class="txtRACComments clstxtComments" rows="5" readonly></textarea>
+                        </div>
+                        <div class="col-md-12 comments" *ngIf=" txtOPCOHCommentsyes">
+                            <label class="labelComments" id="lblLevel3"> {{ lblLevel3Text }}</label>
+                            <textarea id="txtOPCOHComments1" name="txtOPCOHComments" [(ngModel)]="txtOPCOHComments"
+                                class="txtOPCOHComments clstxtComments" rows="5" readonly></textarea>
+                        </div>
+                        <div class="col-md-12 comments" *ngIf=" txtOPCOCHCommentsyes">
+                            <label class="labelComments" id="lblLevel4"> {{ lblLevel4Text }} </label>
+                            <textarea name="txtOPCOCHComments" [(ngModel)]="txtOPCOCHComments"
+                                class="txtOPCOCHComments clstxtComments" rows="5" readonly></textarea>
+                        </div>
+
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label class="card-text">if you have any supporting documents please attach here</label>
+                            <br />
+                            <input type="file" name="chooseFile" id="req_chooseFile" (change)="onFileSelected($event)"
+                                class="chooseFile isreadyonlyfieldAll" data-choice="req_chooseFile">
+
+                        </div>
+                         <div class="col-md-6"  *ngIf="readOnly">
+                            <label class="card-text">Uploaded Documents</label>
+                            <ul class="input_fields_wrap" id="input_fields">
+                                <li *ngFor="let attachment of attachments">
+                                    <a class="link-icon" [href]="getFullUrl(attachment.ServerRelativeUrl)" target="_blank">
+                                      <i class="fa fa-paperclip" aria-hidden="true"></i>{{ attachment.FileName }}
+                                    </a>
+                                  </li>
+                            </ul>
+                        </div> 
+                    </div>
+                    <br />
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div style="float:right;">Comments</div>
+                        </div>
+                        <div class="col-md-6">
+                            <div><textarea id="txtComments" [(ngModel)]="txtComments" class="form-control"></textarea>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <br />
+                    <div id="divL3ButtonControls" *ngIf="L3ButtonControls" > 
+                        <div class="row">
+                            <div class="col-md-6">
+
+                            </div>
+                            <div class="col-md-6">
+                                <div class="isOPCOHrequired" *ngIf="isOPCOHrequired">
+                                    <input type="button" class="btnsubmit further" id="btnL3FurtherAction"
+                                        value="Request Further Action" (click)="fn_furtheraction()" />
+                                </div>
+
+
+                                <input type="button" class="btnsubmit reject" value="Reject" (click)="fn_reject()" />
+                                <input type="button" id="btnReview" class="btnsubmit" value="Review Complete"
+                                    (click)="fn_complete()" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <br />
+                    <div id="divL3FurtherAction" *ngIf="L3FurtherAction">
+                        <div class="row furtherAction">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="ddllevel3">Select Approval Level</label>
+                                    <select (change)="onLevelChange($event)" [(ngModel)]="selectedLevel">
+                                        <option value="" disabled selected>Select Level</option>
+                                        <option *ngFor="let item of levelOptions" [value]="item">{{ item }}</option>
+                                      </select> 
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label for="ddllevel3">Select Approver</label>
+                                    <select (change)="onapproverChange($event)" [(ngModel)]="selectedApprover">
+                                        <option value="" disabled selected>Select Approver</option>
+                                        <option *ngFor="let item of levelApprovers" [value]="item.ApproverEmail">{{ item.ApproverName }}</option>
+                                      </select>
+                                </div>
+                            </div>
+                            <div class="col-md-4" style="padding: 2%;">
+                                <input type="button" class="btnsubmit" style="float: left;" value="Submit"
+                                    (click)="fn_submittoopco()" />
+                                <input type="button" class="btnsubmit reject" style="float: left;" value="Back"
+                                    (click)="fn_gobackl3()" />
+                            </div>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col-md-6" style="margin-bottom:20px;">
+
+                        </div>
+                        <div class="col-md-6" style="margin-bottom:20px;">
+                        </div>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+</div>
