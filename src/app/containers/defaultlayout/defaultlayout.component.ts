@@ -47,17 +47,20 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
     setActiveTab(tab: string): void {
         this.activeTab = tab;
       }
+      user:any;
     ngOnInit(): void {
         this.CreateForm();
         this.radioChanges();
         this.service.getUserName().subscribe(res => {
             if (res != null) {
                 let user = res as any;
+                this.user=user;
                 console.log(user);
-               this.initialiazeDatatable(); // render datatable based on current user, as of now retrieving all data
+               this.initialiazeDatatable(user.d.Email); // render datatable based on current user, as of now retrieving all data
+               this.getMytasksCOIData();
             }
         });
-        this.getMytasksCOIData();
+       
     }
 //     ngAfterViewInit(): void {
        
@@ -70,10 +73,10 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
 //     });
 //   }
 
-    initialiazeDatatable(){
-        this.service.getCOIData().then(data => {
-            var dataset1 = data;
-            console.log(dataset1);
+    initialiazeDatatable(user:any){
+        this.service.getUserCOIData(user).subscribe(data => {
+            var dataset1 = data as any;
+            console.log(dataset1.value);
             //var currentUserId = _spPageContextInfo.userId;
             const table: any = $("#tblMyCOI");
             table.DataTable({
@@ -85,7 +88,7 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
                     selector: 'td:nth-child(2)'
                 },
                 responsive: true,
-                data: dataset1,
+                data: dataset1.value,
                 "columns": [
 
                     {
@@ -146,7 +149,7 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
                 const taskId = $(event.currentTarget).data('task');
           
                 // Find the row data using taskId
-                const selectedRow = dataset1.find((item) => item.ID === taskId);
+                const selectedRow = dataset1.find((item:any) => item.ID === taskId);
                 if (selectedRow) {
                   this.viewCOI(selectedRow);
                 }
@@ -909,7 +912,7 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
       onSubmitCOIClick(event: Event): void {
         this.setActiveTab('home');
         event.preventDefault();
-        this.initialiazeDatatable();
+        this.initialiazeDatatable(this.user.Email);
         this.cd.detectChanges();
       }
     

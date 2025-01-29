@@ -34,21 +34,63 @@ export class ApiService {
   getUserName() {
     return this.http.get(this.sp_URL + "/_api/Web/CurrentUser", { headers: { Accept: "application/json;odata=verbose" } });
   }
+  getRecordCount() {
+    const url = `${this.sp_URL}/_api/web/lists/getbytitle('COIHolding2025')/items?$top=0&$count=true`;
+    const headers = new HttpHeaders({ 'Accept': 'application/json;odata=verbose' });
+    return this.http.get<any>(url, { headers });
+  }
   getUserCOIData(userid:any){
     var Url = this.sp_URL + "/_api/web/lists/getByTitle('COIHolding2025')/items?$select=ID,Title,Status,Created,WorkflowStatus,Author/Name,Created,Author/Id,*&$expand=Author&$orderby=ID desc&$top=5000&$filter=Author/Id eq " + userid + "";
     return this.http.get(Url);
   }
-  getCOIData(){
-    
-    return sp.web.lists.getByTitle('COIHolding2025').items.getAll();
-    
-   // return this.http.get(this.sp_URL+ "/_api/web/lists/getByTitle('COIHolding2022')/items?$select=ID,Title,Status,Created,WorkflowStatus,Author/Name,Created,Author/Id,COIappro&$expand=Author&$orderby=ID desc&$top=5000");
+  async getAllCOIData(){
+    var Url = this.sp_URL + + "/_api/web/lists/getbytitle('COIHolding2025')/items?$top=0&$count=true";
+    return this.http.get(Url);
   }
   getMytasksCOIData(userId:any){
     var request_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?select=AssignedTo,PendingWith,Status,*&$filter=(AssignedTo eq '" + userId + "')"; //***replace title with email 
     return this.http.get(request_url);
-   // return this.http.get(this.sp_URL+ "/_api/web/lists/getByTitle('COIHolding2022')/items?$select=ID,Title,Status,Created,WorkflowStatus,Author/Name,Created,Author/Id,COIappro&$expand=Author&$orderby=ID desc&$top=5000");
   }
+  getMytasksCEOData(userEmail:any){
+    var request_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?select=PendingWith,Status,*&$filter=((PendingWith eq '" + userEmail + "') and (Status eq 'Pending With CEO'))";
+    return this.http.get(request_url);
+  }
+  getMytasksCEOCompletedData(){
+    var request_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?select=ApproverLevel,Level,PendingWith,Status,*&$filter=((ApproverLevel eq 'CEO') and (Status eq 'Approved'))";
+    return this.http.get(request_url);
+  }
+  getAllCOICompletedData(opco:string){
+    var request_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?$select=ID,Title,Created,WorkflowStatus,Status,Author/Name,Created,Author/Id,EmployeeEmail,EmployeeName,ManagerEmail,OPCO&$expand=Author&$filter=(OPCO eq '" + opco + "')&$top=50000";
+    return this.http.get(request_url);
+  }
+  getDeclaredCOI(){
+    var r_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?$select=ID,Title,Created,WorkflowStatus,Status,Author/Name,Created,Author/Id,"
+    +"QuestionA,QuestionB,QuestionC,QuestionD,QuestionE,QuestionF,QuestionG,QuestionH,QuestionAComment,QuestionBComment,QuestionCComment,QuestionDComment,QuestionEComment,QuestionFComment,QuestionGComment,QuestionHComment,"
+    +"EmployeeEmail,EmployeeName,ManagerEmail&$expand=Author"
+    +"&$filter=(((QuestionB eq 'Yes') or (QuestionC eq 'Yes') or "
+    +"(QuestionD eq 'Yes') or (QuestionE eq 'Yes') or (QuestionF eq 'Yes') or "
+    +"(QuestionG eq 'Yes') or (QuestionH eq 'Yes')) and (Status ne 'Cancelled'))&$top=50000";
+    return this.http.get(r_url);
+  }
+getDeclaredCOIRetail(){
+  var r_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?$select=ID,Title,Created,WorkflowStatus,Status,Author/Name,Created,Author/Id,"
+			+"QuestionA,QuestionB,QuestionC,QuestionD,QuestionE,QuestionF,QuestionG,QuestionH,QuestionAComment,QuestionBComment,QuestionCComment,QuestionDComment,QuestionEComment,QuestionFComment,QuestionGComment,QuestionHComment,"
+			+"EmployeeEmail,EmployeeName,ManagerEmail&$expand=Author"
+			+"&$filter=(OPCO eq 'Retail') and ((QuestionB eq 'Yes') or (QuestionC eq 'Yes') or "
+			+"(QuestionD eq 'Yes') or (QuestionE eq 'Yes') or (QuestionF eq 'Yes') or "
+			+"(QuestionG eq 'Yes') or (QuestionH eq 'Yes')) and (Status ne 'Cancelled')&$top=50000";
+      return this.http.get(r_url);
+}
+getDeclaredCOIGS(){
+  var r_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?$select=ID,Title,Created,WorkflowStatus,Status,Author/Name,Created,Author/Id,"
+			+"QuestionA,QuestionB,QuestionC,QuestionD,QuestionE,QuestionF,QuestionG,QuestionH,QuestionAComment,QuestionBComment,QuestionCComment,QuestionDComment,QuestionEComment,QuestionFComment,QuestionGComment,QuestionHComment,"
+			+"EmployeeEmail,EmployeeName,ManagerEmail&$expand=Author"
+			+"&$filter=(OPCO eq 'Global Solutions') and ((QuestionB eq 'Yes') or (QuestionC eq 'Yes') or "
+			+"(QuestionD eq 'Yes') or (QuestionE eq 'Yes') or (QuestionF eq 'Yes') or "
+			+"(QuestionG eq 'Yes') or (QuestionH eq 'Yes')) and (Status ne 'Cancelled')&$top=50000";
+      return this.http.get(r_url);
+}
+
   getCOI(taskid:any){
     var request_url = this.sp_URL  + "/_api/web/lists/getByTitle('COIHolding2025')/items(" + taskid + ")?$select=*,Attachments,AttachmentFiles&$expand=AttachmentFiles";
     return this.http.get(request_url);
@@ -63,7 +105,6 @@ export class ApiService {
       .then((response: any) => response.FormDigestValue);
   }
    async AddCOI(COIData:any){
-    alert("COI");
     const requestDigest = await this.getRequestDigest();
     //const processCOI = async () => {
     const item: IItemAddResult =
@@ -100,7 +141,6 @@ export class ApiService {
   return item;
 }
 async addAttachment(itemId: number, file: File, requestDigest: string) {
-  console.log(requestDigest);
   const url = `${this.sp_URL}/_api/web/lists/getbytitle('COIHolding2025')/items(${itemId})/AttachmentFiles/add(FileName='${file.name}')`;
   const headers = new HttpHeaders({
     'X-RequestDigest': requestDigest,
@@ -121,7 +161,11 @@ async UpdateCOI(Id:any,COIData:any,Attachments:any){
 }
 return from(processCOI());
 }
-uploadFile(file:any,item:any){
+isUserMember(groupName:any,userId:any){
+  var url= this.sp_URL + "/_api/web/sitegroups/getByName('"+ groupName +"')/Users?$filter=Id eq " + userId;
+  return this.http.get(url);
 
 }
+
+  
 }

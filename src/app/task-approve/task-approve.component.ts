@@ -450,7 +450,8 @@ fn_submittoopco(){
         var stage="";
         var workflowtrigger="";
         var aprlevel2 = "Level3";
-        reviewstatus = "Pending With "+ this.selectedApprover;
+        let approvername= this.approvers.filter((e:any)=>e.ApproverEmail == this.selectedApprover && e.Title == this.selectedLevel).map((i:any)=> i.ApproverName)
+        reviewstatus = "Pending With "+ this.selectedLevel;
         managerstatus = "Approved by Compliance";   
         stage ="Inprogress";
         workflowtrigger="Yes";
@@ -689,7 +690,7 @@ file:any;
           'cLevel':cLevel,
           'Stage':stage,
           'PendingWith':pendingwith,
-          'AssignedTo':  (managerstatus !== "Reviwed and Closed by Compliance") ?'Chandana.Chikati1-e@maf.ae':'', // assignedTo,
+          'AssignedTo':   assignedTo,
           'WorkflowTrigger':workflowtrigger,
       };
       switch(this.level){

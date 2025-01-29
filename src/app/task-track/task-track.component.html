@@ -6,7 +6,7 @@
 					id="home-tab" href="javascript:void(0)" role="tab" aria-controls="home"
 					aria-selected="activeTab === 'home'">
 					&nbsp;Submit COI Declaration<sup style="font-size: 12px;">
-						<span id="spnmyrequests"></span></sup></a>
+						<span id="spnmyrequests">{{spnmyrequests}}</span></sup></a>
 			</li>
 			<li class="nav-item">
 				<a class="nav-link" id="mytasks-tab" [class.active]="activeTab === 'profile'" href="javascript:void(0)"
@@ -14,39 +14,86 @@
 					aria-selected="activeTab === 'profile'">
 					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; My Pending Approvals<sup
 						style="font-size: 12px;">
-						<span id="spnmytasks"></span></sup></a>
+						<span id="spnmytasks">{{spnmytasks}}</span></sup></a>
 
 			</li>
+            
 
-
-			<li class="nav-item hide" id="mytasksceo">
+			<li class="nav-item" id="mytasksceo" *ngIf="mytasksceo">
 				<a class="nav-link" id="mytasksceo-tab" [class.active]="activeTab === 'ceopending'"
 					href="javascript:void(0)" role="tab" aria-controls="profile" (click)="onCEOTasksClick($event)"
 					aria-selected="activeTab === 'ceopending'">
 					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; CEO Pending Approvals<sup
 						style="font-size: 12px;">
-						<span id="spnmytasksceo"></span></sup></a>
+						<span id="spnmytasksceo">{{spnmytasksceo}}</span></sup></a>
 			</li>
-			<li class="nav-item hide" id="mycompletedtasksceo">
-				<a class="nav-link" id="mycompletedtasksceo-tab" data-toggle="tab" href="#completedceo" role="tab"
-					aria-controls="profile" aria-selected="false">
+			<li class="nav-item" id="mycompletedtasksceo" *ngIf="mycompletedtasksceo" >
+				<a class="nav-link" id="mycompletedtasksceo-tab" [class.active]="activeTab === 'ceocompleted'"
+				href="javascript:void(0)" (click)="onCEOTasksCompletedClick($event)" role="tab"
+					aria-controls="profile" aria-selected="activeTab === 'ceocompleted'">
 					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; CEO Completed Approvals<sup
 						style="font-size: 12px;">
-						<span id="spnmytaskscompletedceo"></span></sup></a>
+						<span id="spnmytaskscompletedceo">{{spnmytaskscompletedceo}}</span></sup></a>
 			</li>
 
-			<li class="nav-item hide" id="mycompletedtasksco">
-				<a class="nav-link" id="mycompletedtasksco-tab" data-toggle="tab" href="#completedco" role="tab"
+			<li class="nav-item" id="mycompletedtasksco" *ngIf="mycompletedtasksco">
+				<a class="nav-link" id="mycompletedtasksco-tab" [class.active]="activeTab === 'allcoicompleted'" 
+				href="javascript:void(0)" (click)="onAllcoiTasksCompletedClick($event)" role="tab"
 					aria-controls="profile" aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; All COI request<sup style="font-size: 12px;">
-						<span id="spnmytaskscompletedco"></span></sup></a>
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompleted'"></i>&nbsp; All COI request<sup style="font-size: 12px;">
+						<span id="spnmytaskscompletedco">{{spnmytaskscompletedco}}</span></sup></a>
 			</li>
 
-			<li class="nav-item hide" id="mycompletedtasksstatus">
-				<a class="nav-link" id="mycompletedtasksstatus-tab" data-toggle="tab" href="#completedstatus" role="tab"
-					aria-controls="profile" aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; Declared COI</a>
+			<li class="nav-item" id="mycompletedtaskscols" *ngIf="mycompletedtaskscols">
+				<a class="nav-link" id="mycompletedtasksco-tabls" [class.active]="activeTab === 'allcoicompletedls'"
+				(click)="onAllcoilsTasksCompletedClick($event)" role="tab" aria-controls="profile"
+				 aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedls'"></i>&nbsp; All COI request Lifestyle<sup style="font-size: 12px;">
+				<span id="spnmytaskscompletedcols">{{spnmytaskscompletedcols}}</span>
+				</sup></a>
 			</li>
+			<li class="nav-item" id="mycompletedtaskscogs" *ngIf="mycompletedtaskscogs">
+				<a class="nav-link" id="mycompletedtasksco-tabgs" [class.active]="activeTab === 'allcoicompletedgs'" 
+				(click)="onAllcoigsTasksCompletedClick($event)" role="tab" aria-controls="profile"
+				 aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedgs'"></i>&nbsp; All COI request Global Solutions<sup style="font-size: 12px;">
+				<span id="spnmytaskscompletedcogs">{{spnmytaskscompletedcogs}}</span>
+				</sup></a>
+			</li>
+			<li class="nav-item" id="mycompletedtaskscoretail" *ngIf="mycompletedtaskscoretail">
+				<a class="nav-link" id="mycompletedtasksco-tabretail" [class.active]="activeTab === 'allcoicompletedretail'"
+				(click)="onAllcoiretailTasksCompletedClick($event)" role="tab" aria-controls="profile"
+				 aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedretail'"></i>&nbsp; All COI request Retail<sup style="font-size: 12px;">
+				<span id="spnmytaskscompletedcoretail">{{spnmytaskscompletedcoretail}}</span>
+				</sup></a>
+			</li>
+	
+			<li class="nav-item" id="mycompletedtasksstatus" *ngIf="mycompletedtasksstatus">
+				<a class="nav-link" id="mycompletedtasksstatus-tab" [class.active]="activeTab === 'declaredCOI'"
+				(click)="onDeclaredCOIClick($event)"  role="tab" aria-controls="profile"
+				 aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOI'"></i>&nbsp; Declared COI<sup style="font-size: 12px;">
+				<span id="spndeclaredcoi">{{spndeclaredcoi}}</span></sup></a>
+			</li>
+
+			<li class="nav-item" id="mycompletedtasksstatusretail" *ngIf="mycompletedtasksstatusretail">
+				<a class="nav-link" id="mycompletedtasksstatus-tabretail"
+				(click)="onRetailDeclaredCOIClick($event)" [class.active]="activeTab === 'declaredCOIretail'" role="tab" aria-controls="profile"
+				 aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOIretail'"></i>&nbsp; Declared COI Retail<sup style="font-size: 12px;">
+				<span id="spndeclaredcoiretail">{{spndeclaredcoiretail}}</span></sup></a>
+			</li>
+
+			<li class="nav-item " id="mycompletedtasksstatusglobalsolutions" *ngIf="mycompletedtasksstatusglobalsolutions">
+				<a class="nav-link" id="mycompletedtasksstatus-tabglobalsolutions" 
+				(click)="onGSDeclaredCOIClick($event)" [class.active]="activeTab === 'declaredCOIGS'" role="tab" aria-controls="profile"
+				 aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOIGS'"></i>&nbsp; Declared COI Global Solutions<sup style="font-size: 12px;">
+				<span id="spndeclaredcoigs">{{spndeclaredcoigs}}</span></sup></a>
+			</li>
+
+			
 
 
 		</ul>
@@ -73,12 +120,13 @@
 
 							<div class="callout-table">
 								<div class="table-responsive mt-3">
-									<table id="tblMyTimeSheet" class="table table-striped table-bordered"
+									<table id="tblMycoi" class="table table-striped table-bordered"
 										cellspacing="0" width="100%">
 										<thead>
 											<tr>
 
 												<th class="no-sort sorting_desc hide">ID</th>
+												<th class="no-sort sorting"> </th>
 												<th class="no-sort sorting">Name</th>
 												<th class="no-sort sorting">Status</th>
 												<th class="no-sort sorting desc">Created On</th>
@@ -130,14 +178,14 @@
 				</div>
 			</div>
 
-			<div *ngIf="activeTab === 'ceopending'" class="tab-pane fade" id="profileceo" role="tabpanel"
+			<div *ngIf="activeTab === 'ceopending'"  id="profileceo" role="tabpanel"
 				aria-labelledby="mytasks-tab">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card p-2">
 							<div class="table-responsive">
 								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
-									style="background:white;" id="mytasksceotbl">
+									 id="mytasksceotbl">
 									<thead>
 										<tr>
 
@@ -159,12 +207,12 @@
 			</div>
 
 
-			<!-- <div class="tab-pane fade" id="completed" role="tabpanel" aria-labelledby="mytasks-tab">
+			 <div *ngIf="activeTab === 'ceocompleted'" id="completed" role="tabpanel" aria-labelledby="mytasks-tab">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card p-2">
 						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompleted">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedceo">
 								<thead>
 									<tr>
 										<th class="no-sort sorting_desc hide">ID</th>
@@ -184,36 +232,13 @@
 			</div>
 		</div>
 
-		<div class="tab-pane fade" id="completedceo" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedceotbl">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
 
-						</div>
-
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="tab-pane fade" id="completedco" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-2">
-					<label class="card-text">Filter By Opco</label>
-					<select name="ddlopcoMaster" class="form-control" id="ddlopcoMaster">
+		<div *ngIf="activeTab === 'allcoicompleted'" id="completedco" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row" >
+				<div class="d-flex align-items-center ml-auto" style="margin-right: 30px; margin-top: 10px;">
+					<label class="card-text" style="margin-right: 10px;">Filter By Opco</label>
+					<select name="ddlopcoMaster" class="form-control w-auto" id="ddlopcoMaster" (change)="onOpcoChange($event)">
+						<option value="" disabled>Select OPCO</option>
 						<option value="Holding">Holding</option>
 						<option value="Global Solutions">Global Solutions</option>
 						<option value="Lifestyle">Lifestyle</option>
@@ -246,7 +271,79 @@
 			</div>
 		</div>
 
-		<div class="tab-pane fade" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
+		<div *ngIf="activeTab === 'allcoicompletedls'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblls">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="activeTab === 'allcoicompletedgs'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblgs">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="activeTab === 'allcoicompletedretail'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblretail">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="activeTab === 'declaredCOI'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
 			<div class="row">
 				<div class="col-md-12">
 					<div class="card p-2">
@@ -269,8 +366,55 @@
 					</div>
 				</div>
 			</div>
-		</div> -->
+		</div>
+		<div *ngIf="activeTab === 'declaredCOIretail'" id="completedstatusretail" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblretail">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
 
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<div *ngIf="activeTab === 'declaredCOIGS'" id="completedstatusglobalsolutions" role="tabpanel" aria-labelledby="mytasks-tab">
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card p-2">
+						<div class="table-responsive">
+							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblglobalsolutions">
+								<thead>
+									<tr>
+										<th class="no-sort sorting_desc hide">ID</th>
+										<th class="no-sort sorting">Employee Name</th>
+										<th class="no-sort sorting">Employee Email</th>
+										<th class="no-sort sorting desc">Requested on</th>
+										<th class="no-sort sorting">Status</th>
+										<th class="no-sort sorting">View</th>
+									</tr>
+								</thead>
+							</table>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
 
 		</div>
 	</div>
@@ -1136,7 +1280,7 @@
 									<div class="col-md-6">
 										<input type="button" class="btnsubmit close" data-dismiss="modal"
 											(click)="closeModal()" value="Close" />
-										<input type="button" class="btnsubmit" *ngIf="readOnly" id="btnResubmit"
+										<input type="button" class="btnsubmit" *ngIf="readOnly && activeTab === 'home'" id="btnResubmit"
 											value="Re-submit the new COI" (click)="fn_resubmit()" />
 										<input type="submit" *ngIf="!readOnly" value="Submit" class="btnsubmit" />
 										<!-- <input type="button" class="btnsubmit" value="Submit" onclick="fn_submit()" /> -->

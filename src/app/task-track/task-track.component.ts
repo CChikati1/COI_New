@@ -13,6 +13,7 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TaskApproveComponent } from '../task-approve/task-approve.component';
 import { environment } from '../../environments/environment';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
     selector: 'app-task-track',
@@ -60,6 +61,26 @@ export class TaskTrackComponent
     lblLevel2Text = '';
     lblLevel3Text ='';
     lblLevel4Text ='';
+    mytasksceo:boolean=false;
+    mycompletedtasksceo:boolean=false;
+    mycompletedtasksco:boolean=false;
+    mycompletedtasksstatus:boolean=false;
+    mycompletedtaskscols:boolean=false;
+    mycompletedtaskscogs:boolean=false;
+    mycompletedtasksstatusglobalsolutions:boolean=false;
+    mycompletedtaskscoretail:boolean=false;
+    mycompletedtasksstatusretail:boolean=false;
+    spnmyrequests:string='0';
+    spnmytasks:string='0';
+    spnmytasksceo:string='0';
+    spnmytaskscompletedceo:string='0';
+    spnmytaskscompletedco:number=0;
+    spnmytaskscompletedcols:string='0';
+    spnmytaskscompletedcogs:string='0';
+    spnmytaskscompletedcoretail:string='0';
+    spndeclaredcoi:string='0';
+    spndeclaredcoiretail:string='0';
+    spndeclaredcoigs:string='0';
     constructor(private dialog: MatDialog, public router: Router, public service: ApiService, private fb: FormBuilder, private cd: ChangeDetectorRef
     ) {
 
@@ -96,32 +117,48 @@ export class TaskTrackComponent
                // console.log(user.d.Id);
                 this.initialiazeDatatable(user.d.Id); // render datatable based on current user, as of now retrieving all data
                 this.getMytasksCOIData();
+                //this.isUserMember("Holding CEO group",this.userId);
+                this.mytasksceo=true;
+                this.mycompletedtasksceo=true;
+                this.getMytaskCEOCompletedData();
+                this.getMytaskCEOData();
+                this.getDeclaredCOI();
+                
+		        //this.isUserMemberCO("Holding CO",this.userId);
+                this.mycompletedtasksco = true;
+                this.mycompletedtasksstatus =true;
+                this.getMytasksCOIData();
+                this.getAllCOICompletedData('Holding');
+                
+                //this.isUserMemberCOLS();
+                this.mycompletedtaskscols = true;
+                this.getAllCOICompletedData('Lifestyle');
+                
+                //this.isUserMemberCOGS();
+                this.mycompletedtaskscogs = true;
+                this.mycompletedtasksstatusglobalsolutions = true;
+                this.getAllCOICompletedData('Global Solutions');
+                this.getDeclaredCOIGS();
+                
+                //this.isUserMemberCOGSRetail();
+                this.mycompletedtaskscoretail = true;
+                this.mycompletedtasksstatusretail=true;
+                this.getAllCOICompletedData('Retail');
+                this.getDeclaredCOIRetail();
+
+                this.getAllCOICount();
+                this.cd.detectChanges();
             }
         });
         
     }
-    // ngAfterViewInit(): void {
-    //     this.cd.detectChanges();
-    // }
-    
-    //     ngAfterViewInit(): void {
-
-    //     const table = $('#mytasks').DataTable();
-
-    //     // Listen for clicks on the 'View' button
-    //     $('#mytasks').on('click', '.approve_task', (event: any) => {
-    //       const taskId = $(event.target).data('id');
-    //       this.router.navigate(['/task-approve', taskId]);
-    //     });
-    //   }
 
     initialiazeDatatable(userid:any) {
         this.service.getUserCOIData(userid).subscribe(data => {
             let r=data as any;
             var dataset1 = r.value;
-           // console.log(dataset1.value);
-            //var currentUserId = _spPageContextInfo.userId;
-            const table: any = $("#tblMyTimeSheet");
+            this.spnmyrequests=dataset1.length;
+            const table: any = $("#tblMycoi");
             table.DataTable({
                 "order": [[0, "desc"]],
                 destroy: true,
@@ -144,16 +181,28 @@ export class TaskTrackComponent
                         "render": function (e: any) {
                             var status_html = "";
                             if (e.ID != null) {
-
-
-                                status_html = '<a data-task="' + e.ID + '" data-tab="myrequest" class="anc_task">View COI </a>';
-                                // "<span style='padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;'>" + e.ID+ "<span>";
-
+                                status_html = '<a style="padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;" data-task="' + e.ID + '" data-tab="myrequest" class="anc_task">View COI </a>';
                                 return status_html;
 
                             } else {
                                 return "";
                             }
+                        }
+                    },
+                    {
+                        "orderable": false,
+                        "data": null,
+                        "defaultContent": '',
+                        "render": function (e: any) {
+
+                            if (e.EmployeeName != null && e.EmployeeName != "") {
+                                var status_html = "";
+                                status_html = "<span style=''>" + e.EmployeeName + "<span>";
+                            } else {
+                                status_html = "<span style=''><span>";
+                            }
+                            return status_html;
+
                         }
                     },
 
@@ -187,7 +236,7 @@ export class TaskTrackComponent
                     }
                 ]
             });
-            $('#tblMyTimeSheet tbody').on('click', '.anc_task', (event) => {
+            $('#tblMycoi tbody').on('click', '.anc_task', (event) => {
                 const rowData = $(event.currentTarget).closest('tr').data();
                 const taskId = $(event.currentTarget).data('task');
 
@@ -196,6 +245,7 @@ export class TaskTrackComponent
                 if (selectedRow) {
                     this.viewCOI(taskId);
                 }
+                
             });
         });
     }
@@ -217,6 +267,8 @@ export class TaskTrackComponent
             // Set form to read-only mode
             this.myModal = true;
             this.cd.detectChanges();
+            this.scrollToForm();
+            
         });
 
        
@@ -1122,10 +1174,6 @@ export class TaskTrackComponent
             this.readOnly = false;
             this.CreateForm();
         });
-
-
-
-
     }
     file:any;
     onFileSelected(event: any) {
@@ -1188,12 +1236,15 @@ export class TaskTrackComponent
 
         });
     }
+    
     getMytasksCOIData() {
-        this.service.getUserName().subscribe(res => {
-            if (res != null) {
-                let user = res as any;
-                this.service.getMytasksCOIData(user.d.Email).subscribe(data => {
+       // this.service.getUserName().subscribe(res => {
+            if (this.user != null) {
+               // let user = res as any;
+                this.service.getMytasksCOIData(this.user.d.Email).subscribe(data => {
                     var dataset1 = data as any;
+                    this.spnmytasks=dataset1.value.length;
+                    //console.log(dataset1.value.length);
                     //var currentUserId = _spPageContextInfo.userId;
                     const table: any = $("#mytasks");
                     table.DataTable({
@@ -1257,7 +1308,7 @@ export class TaskTrackComponent
                     });
                 });
             }
-        });
+       // });
     }
     onMyTasksClick(event: Event): void {
         this.myModal = false;
@@ -1272,7 +1323,73 @@ export class TaskTrackComponent
         this.readOnly = false;
         this.setActiveTab('ceopending');
         event.preventDefault();
-       // this.getMytasksCOIData();
+        this.getMytaskCEOData();
+        this.cd.detectChanges();
+    }
+    onCEOTasksCompletedClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('ceocompleted');
+        event.preventDefault();
+        this.getMytaskCEOCompletedData();
+        this.cd.detectChanges();
+    }
+    onAllcoiTasksCompletedClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('allcoicompleted');
+        event.preventDefault();
+        this.getAllCOICompletedData('Holding');
+        this.cd.detectChanges();
+    }
+    onAllcoilsTasksCompletedClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('allcoicompletedls');
+        event.preventDefault();
+        this.getAllCOICompletedData('Lifestyle');
+        this.cd.detectChanges();
+    }
+    onAllcoigsTasksCompletedClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('allcoicompletedgs');
+        event.preventDefault();
+        this.getAllCOICompletedData('Global Solutions');
+        this.cd.detectChanges();
+    }
+    onAllcoiretailTasksCompletedClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('allcoicompletedretail');
+        event.preventDefault();
+        this.getAllCOICompletedData('Retail');
+        this.cd.detectChanges();
+    }
+
+    
+    onDeclaredCOIClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('declaredCOI');
+        event.preventDefault();
+        this.getDeclaredCOI();
+        this.cd.detectChanges();
+    }
+    onRetailDeclaredCOIClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('declaredCOIretail');
+        event.preventDefault();
+        this.getDeclaredCOIRetail();
+        this.cd.detectChanges();
+    }
+    onGSDeclaredCOIClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('declaredCOIGS');
+        event.preventDefault();
+        this.getDeclaredCOIGS();
         this.cd.detectChanges();
     }
 
@@ -1282,7 +1399,507 @@ export class TaskTrackComponent
         this.initialiazeDatatable(this.user.d.Id);
         this.cd.detectChanges();
     }
+    onOpcoChange(event: Event) {
+        const selectedValue = (event.target as HTMLSelectElement).value;
+        this.getAllCOICompletedData(selectedValue);
+        this.cd.detectChanges();
+        //alert("Selected OPCO:"+ selectedValue);
+        
+        // Perform any action based on the selected value
+      }
+    isUserMember(groupName:any,userId:any){
+       this.service.isUserMember(groupName,userId).subscribe((data:any)=>{
+        if(data.d.results[0] != undefined){
+            //User is a Member, do something or return true
+               this.mytasksceo=true;
+               this.mycompletedtasksceo=true;
+            }
+       });
+       
+        
+    }
+    isUserMemberCO(groupName:any,userId:any){
+        this.service.isUserMember(groupName,userId).subscribe((data:any)=>{
+         if(data.d.results[0] != undefined){
+             //User is a Member, do something or return true
+             this.mycompletedtasksco = true;
+             this.mycompletedtasksstatus =true;
+             }
+        });
+        
+         
+     }
+     isUserMemberCOLS(){
+        this.service.isUserMember('LSCompliance',this.userId).subscribe((data:any)=>{
+            if(data.d.results[0] != undefined){
+                this.mycompletedtaskscols=true;
+            }
+            });
+        }
+        isUserMemberCOGS(){
+            this.service.isUserMember('GSCompliance',this.userId).subscribe((data:any)=>{
+                if(data.d.results[0] != undefined){
+                    this.mycompletedtaskscogs=true;
+                }
+                });
+            }
+            isUserMemberCOGSRetail(){
+                this.service.isUserMember('RetailCompliance',this.userId).subscribe((data:any)=>{
+                    if(data.d.results[0] != undefined){
+                        this.mycompletedtaskscoretail=true;
+                    }
+                    });
+                }
+    getMytaskCEOData(){
+       this.service.getMytasksCEOData(this.user.d.Email).subscribe((ceodata:any)=>{
+        var dataset1 = ceodata as any;
+        this.spnmytasksceo=dataset1.value.length;
+        //var currentUserId = _spPageContextInfo.userId;
+        const table: any = $("#mytasksceotbl");
+         table.DataTable({
+            destroy: true, "order": [[0, "desc"]],
+            "aLengthMenu": [[6, 12, 30, -1], [6, 12, 30, "All"]],
+            "iDisplayLength": 6,
+            data: dataset1.value,
+            "columns": [
+                 {
+                     "data": "ID", "class": "hide",
+                 },
+                { "data": "EmployeeName" },
+                { "data": "EmployeeEmail" },
+                {
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) {
+                        if (e.Created != null) {
+                            return new Date(e.Created).toLocaleDateString();
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+                { "data": "Status" },
 
+                {
+                    "class": 'control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e: any) { return `<a href="javascript:void(0);" class="approve_task" data-id="${e.ID}">View</a>`; }
+                },
 
+            ]
+        });
+        $('#mytasksceotbl tbody').on('click', '.approve_task', (event: any) => {
+            //const taskId = $(event.currentTarget).data('Id');
+            const taskId = $(event.target).data('id');
+            if (taskId) {
+                const selectedRow = dataset1.value.find((item: any) => item.ID === taskId);
+                if (selectedRow) {
+
+                    this.dialog.open(TaskApproveComponent, {
+                        width: '90%', // Optional: Set modal width
+                        height: '90%',
+                        data: { id: taskId, row: selectedRow }, // Pass the TaskID to the modal component
+                    });
+                }
+                else {
+                    console.error('Task invalid!');
+                }
+            } else {
+                console.error('TaskID is undefined or invalid!');
+            }
+            // this.router.navigate(['/task-approve', taskId]);
+        });
+    })
+   }
+   
+getAllCOICount(){
+    this.service.getRecordCount().subscribe(res=>{
+        var count=res as any;
+     this.spnmytaskscompletedco =count.d.results.length;
+    });
+    //console.log(count);
+    //
+}
+   getMytaskCEOCompletedData(){
+    this.service.getMytasksCEOCompletedData().subscribe((ceodata:any)=>{
+     var dataset1 = ceodata as any;
+     this.spnmytaskscompletedceo = dataset1.value.length;
+     this.cd.detectChanges();
+     //var currentUserId = _spPageContextInfo.userId;
+     const table: any = $("#mytaskscompletedceo");
+      table.DataTable({
+         destroy: true, "order": [[0, "desc"]],
+         "aLengthMenu": [[6, 12, 30, -1], [6, 12, 30, "All"]],
+         "iDisplayLength": 6,
+         data: dataset1.value,
+         "columns": [
+              {
+                  "data": "ID", "class": "hide",
+              },
+             { "data": "EmployeeName" },
+             { "data": "EmployeeEmail" },
+             {
+                 "orderable": false,
+                 "data": null,
+                 "defaultContent": '',
+                 "render": function (e:any) {
+                     if (e.Created != null) {
+                         return new Date(e.Created).toLocaleDateString();
+                     } else {
+                         return "";
+                     }
+                 }
+             },
+             { "data": "Status" },
+
+             {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e: any) {
+                    var status_html = "";
+                    if (e.ID != null) {
+                        status_html = '<a style="padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;" data-task="' + e.ID + '" data-tab="myrequest" class="anc_task">View</a>';
+                        return status_html;
+
+                    } else {
+                        return "";
+                    }
+                }
+            },
+
+         ]
+     });
+     $('#mytaskscompletedceo tbody').on('click', '.anc_task', (event) => {
+        const rowData = $(event.currentTarget).closest('tr').data();
+        const taskId = $(event.currentTarget).data('task');
+
+        // Find the row data using taskId
+        const selectedRow = dataset1.value.find((item:any) => item.ID === taskId);
+        if (selectedRow) {
+            this.viewCOI(taskId);
+        }
+        
+    });
+ })
+}
+getAllCOICompletedData(opco:string){
+    this.service.getAllCOICompletedData(opco).subscribe((allcoidata:any)=>{
+     var dataset1 = allcoidata as any;
+     
+     let table: any; // = $("#mytaskscompletedcotbl");
+     let tableId:any;
+     //var currentUserId = _spPageContextInfo.userId;
+     switch(opco){
+        case "Holding":{
+            table= $("#mytaskscompletedcotbl");
+            tableId="mytaskscompletedcotbl";
+           // this.spnmytaskscompletedco =dataset1.value.length;
+            break;
+        }
+        case "Lifestyle":{
+            table= $("#mytaskscompletedstatustblls");
+            tableId="mytaskscompletedstatustblls";
+            this.spnmytaskscompletedcols =dataset1.value.length;
+            break;
+        }
+        case "Global Solutions":{
+            table= $("#mytaskscompletedstatustblgs");
+            tableId="mytaskscompletedstatustblgs";
+            this.spnmytaskscompletedcogs =dataset1.value.length;
+            break;
+        }
+        case "Retail":{
+            table= $("#mytaskscompletedstatustblretail");
+            tableId="mytaskscompletedstatustblretail";
+            this.spnmytaskscompletedcoretail =dataset1.value.length;
+            break;
+        }
+     }
+     if(this.activeTab == 'allcoicompleted'){
+        table= $("#mytaskscompletedcotbl");
+        tableId="mytaskscompletedcotbl";
+
+     }
+     
+      table.DataTable({
+         destroy: true, "order": [[0, "desc"]],
+         "aLengthMenu": [[6, 12, 30, -1], [6, 12, 30, "All"]],
+         "iDisplayLength": 6,
+         data: dataset1.value,
+         "columns": [
+              {
+                  "data": "ID", "class": "hide",
+              },
+             { "data": "EmployeeName" },
+             { "data": "EmployeeEmail" },
+             {
+                 "orderable": false,
+                 "data": null,
+                 "defaultContent": '',
+                 "render": function (e:any) {
+                     if (e.Created != null) {
+                         return new Date(e.Created).toLocaleDateString();
+                     } else {
+                         return "";
+                     }
+                 }
+             },
+             {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e:any) {
+                   var status_html = "<span style='padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;'>"+e.Status+"<span>";
+                    return status_html;
+                }
+            },
+
+            {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e: any) {
+                    var status_html = "";
+                    if (e.ID != null) {
+                        status_html = '<a style="padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;" data-task="' + e.ID + '" data-tab="myrequest" class="anc_task">View</a>';
+                        return status_html;
+
+                    } else {
+                        return "";
+                    }
+                }
+            },
+
+         ]
+     });
+     
+     $(`#${tableId} tbody`).on('click', '.anc_task', (event) => {
+        const rowData = $(event.currentTarget).closest('tr').data();
+        const taskId = $(event.currentTarget).data('task');
+
+        // Find the row data using taskId
+        const selectedRow = dataset1.value.find((item:any) => item.ID === taskId);
+        if (selectedRow) {
+            this.viewCOI(taskId);
+        }
+        
+    });
+ })
+}
+getDeclaredCOI(){
+    this.service.getDeclaredCOI().subscribe((declaredcoi:any)=>{
+        var dataset1 = declaredcoi as any;
+        this.spndeclaredcoi=dataset1.value.length;
+        const table: any = $("#mytaskscompletedstatustbl");
+        table.DataTable({
+            destroy: true,
+            "order": [[ 0, "desc" ]],
+            "aLengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]],
+            "iDisplayLength": 20,
+            "data": dataset1.value,
+            "columns": [
+            {
+                "data": "ID","class": "hide",
+            },
+
+                { "data": "EmployeeName" },
+                { "data": "EmployeeEmail" },               
+                {
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) {
+                        if (e.Created != null) {
+                            return new Date(e.Created).toLocaleDateString();
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+                   {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e:any) {
+                   
+                           var status_html = "<span style='padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;'>"+e.Status+"<span>";
+                                                    return status_html;
+
+                                        }
+            },
+
+                 
+                {
+                    "class": 'control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) { 
+                        return '<a data-task="'+ e.Id +'" data-tab="others" class="anc_task">View</a>'; 
+                    
+                    }
+                },
+
+            ]
+            
+       });
+       $("#mytaskscompletedstatustbl tbody").on('click', '.anc_task', (event) => {
+        const rowData = $(event.currentTarget).closest('tr').data();
+        const taskId = $(event.currentTarget).data('task');
+
+        // Find the row data using taskId
+        const selectedRow = dataset1.value.find((item:any) => item.ID === taskId);
+        if (selectedRow) {
+            this.viewCOI(taskId);
+        }
+        
+    });
+    });
+}
+
+getDeclaredCOIRetail(){
+    this.service.getDeclaredCOIRetail().subscribe((declaredcoiretail:any)=>{
+        var dataset1 = declaredcoiretail as any;
+        this.spndeclaredcoiretail=dataset1.value.length;
+        const table: any = $("#mytaskscompletedstatustblretail");
+        table.DataTable({
+            destroy: true,"order": [[ 0, "desc" ]],
+            "aLengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]],
+            "iDisplayLength": 20,
+            "data": dataset1.value,
+            "columns": [
+            {
+                "data": "ID","class": "hide",
+            },
+
+                { "data": "EmployeeName" },
+                { "data": "EmployeeEmail" },               
+                {
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) {
+                        if (e.Created != null) {
+                            return new Date(e.Created).toLocaleDateString();
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+                   {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e:any) {
+                   
+                           var status_html = "<span style='padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;'>"+e.Status+"<span>";
+                                                    return status_html;
+
+                                        }
+            },
+
+                 
+                {
+                    "class": 'control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) { 
+                        return '<a  data-task="'+ e.Id +'" data-tab="others" class="anc_task">View</a>'; 
+                    
+                    }
+                },
+
+            ]
+            
+       });
+       $("#mytaskscompletedstatustblretail tbody").on('click', '.anc_task', (event) => {
+        const rowData = $(event.currentTarget).closest('tr').data();
+        const taskId = $(event.currentTarget).data('task');
+
+        // Find the row data using taskId
+        const selectedRow = dataset1.value.find((item:any) => item.ID === taskId);
+        if (selectedRow) {
+            this.viewCOI(taskId);
+        }
+        
+    });
+    });
+    
+}
+getDeclaredCOIGS(){
+    this.service.getDeclaredCOIGS().subscribe((declaredcoigs:any)=>{
+        var dataset1 = declaredcoigs as any;
+        this.spndeclaredcoigs = dataset1.value.length;
+        const table: any = $("#mytaskscompletedstatustblglobalsolutions");
+        table.DataTable({
+            destroy: true,"order": [[ 0, "desc" ]],
+            "aLengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]],
+            "iDisplayLength": 20,
+            "data": dataset1.value,
+            "columns": [
+            {
+                "data": "ID","class": "hide",
+            },
+
+                { "data": "EmployeeName" },
+                { "data": "EmployeeEmail" },               
+                {
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) {
+                        if (e.Created != null) {
+                            return new Date(e.Created).toLocaleDateString();
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+                   {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e:any) {
+                   
+                           var status_html = "<span style='padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;'>"+e.Status+"<span>";
+                                                    return status_html;
+
+                                        }
+            },
+
+                 
+                {
+                    "class": 'control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) { 
+                        return '<a data-task="'+ e.Id +'" data-tab="others" class="anc_task">View</a>'; 
+                    
+                    }
+                },
+
+            ]
+            
+       });
+       $("#mytaskscompletedstatustblglobalsolutions tbody").on('click', '.anc_task', (event) => {
+        const rowData = $(event.currentTarget).closest('tr').data();
+        const taskId = $(event.currentTarget).data('task');
+
+        // Find the row data using taskId
+        const selectedRow = dataset1.value.find((item:any) => item.ID === taskId);
+        if (selectedRow) {
+            this.viewCOI(taskId);
+        }
+        
+    });
+    });
+    
+}
 }
 
