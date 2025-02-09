@@ -481,7 +481,7 @@ fn_submittoopco(){
                 'ApproverLevel':this.selectedLevel,
                 'cLevel':aprlevel2
         };
-        switch(this.aprLevel){
+        switch(this.level){
             case "LM":
             item['ManagerComments'] = this.txtComments;
             break;
@@ -581,8 +581,8 @@ file:any;
         }
       }
  fn_complete() {	
- 
-  if((this.level == "OPCOH" || this.level == "OPCOCH" || (this.opco == "Retail" && this.level == "DH")) && (this.txtComments =="" || this.txtComments == null)){
+ debugger;
+  if((this.level == "RAC" || this.level == "OPCOH" || this.level == "OPCOCH" || (this.opco == "Retail" && this.level == "DH")) && (this.txtComments =="" || this.txtComments == null)){
       swal('','Provide your feedback in the comments box','info');
       return
   }else{

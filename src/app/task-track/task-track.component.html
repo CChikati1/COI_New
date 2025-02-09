@@ -723,7 +723,7 @@
 											form.</span></strong>
 								</p>
 								<br />
-								<div class="btnAgree" style="text-align: right; padding-right:60px ;">
+								<div class="btnAgree">
 									<label class="radio-inline" style="padding:5px;">
 										<input type="radio" formControlName="radioAgreement" value="Yes"> Yes
 									</label>
@@ -864,9 +864,9 @@
 															<th>Remarks</th>
 														</tr>
 													</thead>
-													<tbody>
-														<tr *ngFor="let detail of radio1bDetails.controls; let i = index"
-															[formGroupName]="i">
+													<tbody *ngFor="let detail of radio1bDetails.controls; let i = index" [formGroupName]="i">
+														<tr> 
+															
 															<td><input type="text" formControlName="qbname"
 																	class="form-control" [readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qbrelation"
@@ -874,7 +874,13 @@
 															<td><input type="text" formControlName="qbbenifit"
 																	class="form-control" [readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qbdate"
-																	class="form-control" [readonly]="readOnly"></td>
+																	class="form-control" [readonly]="readOnly">
+																	<div class="error" *ngIf="detail.get('qbdate')?.invalid && detail.get('qbdate')?.touched">
+																		<span *ngIf="detail.get('qbdate')?.errors?.['required']">Date is required.</span>
+																		<span *ngIf="detail.get('qbdate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
+																		<span *ngIf="detail.get('qbdate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+																	  </div>
+																	</td>
 															<td><input type="text" formControlName="qbvalue"
 																	class="form-control" [readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qbremarks"
@@ -882,6 +888,14 @@
 															<td><button type="button" (click)="removeRowqb(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
+														<tr *ngIf="detail.get('qbdate')?.invalid && detail.get('qbdate')?.touched">
+															<td colspan="6" class="error">
+																<span *ngIf="detail.get('qbdate')?.errors?.['required']">Date is required.</span>
+																<span *ngIf="detail.get('qbdate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
+																<span *ngIf="detail.get('qbdate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+															</td>
+														  </tr>
+														
 													</tbody>
 												</table>
 												<button type="button" (click)="addRowqb()" *ngIf="!readOnly">Add
@@ -936,12 +950,21 @@
 															<td><input type="text" formControlName="qcrelation"></td>
 															<td><input type="text" formControlName="qccomprelation">
 															</td>
-															<td><input type="text" formControlName="qcdate"></td>
+															<td><input type="text" formControlName="qcdate">
+																
+															</td>
 															<td><input type="text" formControlName="qcclarifictaion">
 															</td>
 															<td><button type="button" (click)="removeRowqc(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
+														<tr *ngIf="detail.get('qcdate')?.invalid && detail.get('qcdate')?.touched">
+															<td colspan="6" class="error">
+															  <span *ngIf="detail.get('qcdate')?.errors?.['required']">Date is required.</span>
+															  <span *ngIf="detail.get('qcdate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
+															  <span *ngIf="detail.get('qcdate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+															</td>
+														  </tr>
 													</tbody>
 												</table>
 												<button type="button" (click)="addRowqc()" *ngIf="!readOnly">Add
@@ -988,11 +1011,20 @@
 															<td><input type="text" formControlName="qdrelation"></td>
 															<td><input type="text" formControlName="qdcomprelation">
 															</td>
-															<td><input type="text" formControlName="qddate"></td>
+															<td><input type="text" formControlName="qddate">
+																
+															</td>
 															<td><input type="text" formControlName="qddetails"></td>
 															<td><button type="button" (click)="removeRowqd(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
+														<tr *ngIf="detail.get('qddate')?.invalid && detail.get('qddate')?.touched">
+															<td colspan="6" class="error">
+															  <span *ngIf="detail.get('qddate')?.errors?.['required']">Date is required.</span>
+															  <span *ngIf="detail.get('qddate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
+															  <span *ngIf="detail.get('qddate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+															</td>
+														  </tr>
 													</tbody>
 
 
@@ -1050,7 +1082,9 @@
 															<td><input type="text" formControlName="qebenifit"
 																	[readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qedate"
-																	[readonly]="readOnly"></td>
+																	[readonly]="readOnly">
+																	
+																	</td>
 															<td><input type="text" formControlName="qevalue"
 																	[readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qeremarks"
@@ -1058,7 +1092,13 @@
 															<td><button type="button" (click)="removeRowqe(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
-
+														<tr *ngIf="detail.get('qedate')?.invalid && detail.get('qedate')?.touched">
+															<td colspan="6" class="error">
+															  <span *ngIf="detail.get('qedate')?.errors?.['required']">Date is required.</span>
+															  <span *ngIf="detail.get('qedate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
+															  <span *ngIf="detail.get('qedate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+															</td>
+														  </tr>
 													</tbody>
 												</table>
 												<button type="button" (click)="addRowqe()" *ngIf="!readOnly">Add

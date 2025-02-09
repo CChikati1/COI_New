@@ -1,3 +1,16 @@
 .comments{
     display: flex;
 }
+.btnAgree {
+    width: 10%;
+    float: right;
+    color: #fff!important;
+    background-color: #8A1538!important;
+    text-align: center;
+    border-radius: 5px;
+}
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 4px;
+  }

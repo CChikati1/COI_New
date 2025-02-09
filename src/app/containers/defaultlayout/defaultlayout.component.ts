@@ -55,7 +55,6 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
             if (res != null) {
                 let user = res as any;
                 this.user=user;
-                console.log(user);
                this.initialiazeDatatable(user.d.Email); // render datatable based on current user, as of now retrieving all data
                this.getMytasksCOIData();
             }
@@ -824,7 +823,6 @@ export class DefaultlayoutComponent implements OnInit { //,AfterViewInit
             Level:"LM",
         }
         this.service.AddCOI(finalData).then((res) =>{
-             console.log(res);
              alert("Thank you for submiting Conflict of Interest");
              window.location.reload();
             //  swal(

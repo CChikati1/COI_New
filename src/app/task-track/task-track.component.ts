@@ -13,7 +13,9 @@ import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { TaskApproveComponent } from '../task-approve/task-approve.component';
 import { environment } from '../../environments/environment';
-import { HttpHeaders } from '@angular/common/http';
+import { dateFormatValidator } from '../date.validators';
+
+
 
 @Component({
     selector: 'app-task-track',
@@ -678,7 +680,12 @@ export class TaskTrackComponent
 
                 Object.keys(rowGroup.controls).forEach((controlName) => {
                     const control = row.get(controlName);
-                    control?.setValidators(Validators.required);
+                    if (controlName === 'qbdate' || controlName === 'qcdate' || controlName === 'qddate' || controlName === 'qedate') { // Apply date validator only to 'dateField'
+                        control?.setValidators([Validators.required, dateFormatValidator()]);
+                    } else {
+                        control?.setValidators(Validators.required);
+                    }
+                    //control?.setValidators(Validators.required);
                     control?.updateValueAndValidity();
                   });
                
