@@ -1,18 +1,12 @@
-<div class="container taskform" style="border: 1px solid rgb(63, 62, 62); padding: 10px; border-radius: 5px;">
+<div class="container taskform" id="container" style="border: 1px solid rgb(63, 62, 62); padding: 10px; border-radius: 5px;">
 
     <div class="body_style">
         
-        <div class="panel-body form-horizontal form-group" style="background-color: rgb(66, 45, 2)!important;">
-            <div class="row">
-                <div class="col-md-offset-1 col-md-12 header-title" style="color: white;">
-                    Conflict of Interest
-                </div>
-            </div>
-
-        </div>
         <div class="panel-body form-horizontal form-group" style="padding: 10px 20px;">
             <br>
+            <form [formGroup]="form">
             <div class="row">
+                
                 <div class="col-md-12" style="text-align: center;">
                     <b>Annual Conflict of Interest Disclosure Form</b>
                 </div>
@@ -26,7 +20,7 @@
                 </div>
             </div>
             <br />
-            <form [formGroup]="empForm">
+            <div formGroupName="employeeDetails">
                 <div class="row">
 
                     <div class="col-md-4">
@@ -85,16 +79,16 @@
                     </div>
                 </div>
                 <br />
-            </form>
+            </div>
 
             <div class="modal-body">
                 <div class="body_style">
 
                     <!-- <div class="panel-body form-horizontal form-group"> -->
-                        <form [formGroup]="form">
+                        <!-- <form [formGroup]="form"> -->
 
-                            <p style="margin-bottom:0cm;line-height:normal;background:white;"><span
-                                    style="font-size:14px;color:#212529;">&nbsp;</span></p>
+                            <!-- <p style="margin-bottom:0cm;line-height:normal;background:white;"><span
+                                    style="font-size:14px;color:#212529;">&nbsp;</span></p> -->
 
                             <div class="row" formGroupName="question1">
                                 <div class="col-md-10">
@@ -458,7 +452,7 @@
 
                             </div>
 
-                        </form>
+                        <!-- </form> -->
                     <!-- </div> -->
                     <div class="row">
                         <div class="col-md-10 col-xs-10">
@@ -470,45 +464,52 @@
                         </div>
                     </div>
                     <br />
-                    <div class="row" style="border: 1px solid #ccc!important; border-radius: 4px; ">
-                        <div class="col-md-12 comments" *ngIf="txtLMCommentsyes">
-                            <label class="labelComments">Line Manager Comments</label>
-                            <textarea id="txtLMComments1" name="txtLMComments" [(ngModel)]="txtLMComments"
-                                class="txtLMComments clstxtComments" rows="5" readonly></textarea>
-                        </div>
-                        <div class="col-md-12 comments" *ngIf="txtDHCommentsyes">
-                            <!-- <label class="labelComments">Department Head Comments</label> -->
-                            <label class="labelComments" id="lblLevel2">{{ lblLevel2Text }}</label>
-                            <textarea id="txtDHComments1" name="txtDHComments" [(ngModel)]="txtDHComments"
-                                class="txtDHComments clstxtComments" rows="5" readonly></textarea>
-                        </div>
-                        <div class="col-md-12 comments" *ngIf=" txtRACCommentsyes">
-                            <label class="labelComments">Compliance Comments</label>
-                            <textarea id="txtRACComments1" name="txtRACComments" [(ngModel)]="txtRACComments"
-                                class="txtRACComments clstxtComments" rows="5" readonly></textarea>
-                        </div>
-                        <div class="col-md-12 comments" *ngIf=" txtOPCOHCommentsyes">
-                            <label class="labelComments" id="lblLevel3"> {{ lblLevel3Text }}</label>
-                            <textarea id="txtOPCOHComments1" name="txtOPCOHComments" [(ngModel)]="txtOPCOHComments"
-                                class="txtOPCOHComments clstxtComments" rows="5" readonly></textarea>
-                        </div>
-                        <div class="col-md-12 comments" *ngIf=" txtOPCOCHCommentsyes">
-                            <label class="labelComments" id="lblLevel4"> {{ lblLevel4Text }} </label>
-                            <textarea name="txtOPCOCHComments" [(ngModel)]="txtOPCOCHComments"
-                                class="txtOPCOCHComments clstxtComments" rows="5" readonly></textarea>
-                        </div>
+                    
+                    <div formGroupName="comments" class="row"
+										style="border: 1px solid #ccc!important; border-radius: 4px; " *ngIf="readOnly">
+										<div class="col-md-12 comments" *ngIf="txtLMCommentsyes">
+											<label class="labelComments">Line Manager Comments</label>
+											<textarea id="txtLMComments1" name="txtLMComments"
+												formControlName="LMComments" class="txtLMComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf="txtDHCommentsyes">
+											<!-- <label class="labelComments">Department Head Comments</label> -->
+											<label class="labelComments" id="lblLevel2"> {{ lblLevel2Text }}</label>
+											<textarea id="txtDHComments1" name="txtDHComments"
+												formControlName="DHComments" class="txtDHComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf=" txtRACCommentsyes">
+											<label class="labelComments">Compliance Comments</label>
+											<textarea id="txtRACComments1" name="txtRACComments"
+												formControlName="RACComments" class="txtRACComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf=" txtOPCOHCommentsyes">
+											<label class="labelComments" id="lblLevel3"> {{ lblLevel3Text }}</label>
+											<!-- <label class="labelComments" id="lblLevel3"> OPCO Head Comments</label> -->
+											<textarea id="txtOPCOHComments1" name="txtOPCOHComments"
+												formControlName="OPCOHComments" class="txtOPCOHComments clstxtComments"
+												rows="5" readonly></textarea>
+										</div>
+										<div class="col-md-12 comments" *ngIf=" txtOPCOCHCommentsyes">
+											<label class="labelComments" id="lblLevel4">{{ lblLevel4Text}} </label>
+											<!-- <label class="labelComments" id="lblLevel3"> OPCO Country Head Comments</label> -->
+											<textarea name="txtOPCOCHComments" formControlName="OPCOCHComments"
+												class="txtOPCOCHComments clstxtComments" rows="5" readonly></textarea>
+										</div>
 
-                    </div>
+									</div>
                     <br />
                     <div class="row">
-                        <div class="col-md-6">
+                        <!-- <div class="col-md-6">
                             <label class="card-text">if you have any supporting documents please attach here</label>
                             <br />
                             <input type="file" name="chooseFile" id="req_chooseFile" (change)="onFileSelected($event)"
                                 class="chooseFile isreadyonlyfieldAll" data-choice="req_chooseFile">
-
-                        </div>
-                         <div class="col-md-6"  *ngIf="readOnly">
+                        </div> -->
+                         <div class="col-md-6" >
                             <label class="card-text">Uploaded Documents</label>
                             <ul class="input_fields_wrap" id="input_fields">
                                 <li *ngFor="let attachment of attachments">
@@ -520,80 +521,36 @@
                         </div> 
                     </div>
                     <br />
+                    <div class="page-break"></div>
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <div style="float:right;">Comments</div>
-                        </div>
-                        <div class="col-md-6">
-                            <div><textarea id="txtComments" [(ngModel)]="txtComments" class="form-control"></textarea>
-                            </div>
-                        </div>
-
-                    </div>
-
-                    <br />
-                    <div id="divL3ButtonControls" *ngIf="L3ButtonControls" > 
-                        <div class="row">
-                            <div class="col-md-6">
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="isOPCOHrequired" *ngIf="isOPCOHrequired">
-                                    <input type="button" class="btnsubmit further" id="btnL3FurtherAction"
-                                        value="Request Further Action" (click)="fn_furtheraction()" />
-                                </div>
-
-
-                                <input type="button" class="btnsubmit reject" value="Reject" (click)="fn_reject()" />
-                                <input type="button" id="btnReview" class="btnsubmit" value="Review Complete"
-                                    (click)="fn_complete()" />
-                            </div>
+                        <div class="col-md-12">
+                             <table id="tblHistory" class="table table-bordered table-striped"
+                                                cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th class="no-sort sorting">Version No</th>
+                                                        <th class="no-sort sorting">Modified On</th>
+                                                        <th class="no-sort sorting">Modified By</th>
+    
+                                                    </tr>
+                                                </thead>
+                                                <tbody></tbody>
+                           </table>
                         </div>
                     </div>
-
-                    <br />
-                    <div id="divL3FurtherAction" *ngIf="L3FurtherAction">
-                        <div class="row furtherAction">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="ddllevel3">Select Approval Level</label>
-                                    <select (change)="onLevelChange($event)" [(ngModel)]="selectedLevel">
-                                        <option value="" disabled selected>Select Level</option>
-                                        <option *ngFor="let item of levelOptions" [value]="item">{{ item }}</option>
-                                      </select> 
-                                </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label for="ddllevel3">Select Approver</label>
-                                    <select (change)="onapproverChange($event)" [(ngModel)]="selectedApprover">
-                                        <option value="" disabled selected>Select Approver</option>
-                                        <option *ngFor="let item of levelApprovers" [value]="item.ApproverEmail">{{ item.ApproverName }}</option>
-                                      </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4" style="padding: 2%;">
-                                <input type="button" class="btnsubmit" style="float: left;" value="Submit"
-                                    (click)="fn_submittoopco()" />
-                                <input type="button" class="btnsubmit reject" style="float: left;" value="Back"
-                                    (click)="fn_gobackl3()" />
-                            </div>
-                        </div>
-                    </div> 
+                    
                     <div class="row">
-                        <div class="col-md-6" style="margin-bottom:20px;">
-
-                        </div>
+                       
                         <div class="col-md-6" style="margin-bottom:20px;">
                         </div>
                     </div>
 
-                    <button class="coibutton" (click)="goBack()">Back to COI</button>
+                    <!-- <button class="coibutton" (click)="goBack()">Back to COI</button> -->
                 </div>
 
             </div>
-
+        </form>
 
         </div>
     </div>

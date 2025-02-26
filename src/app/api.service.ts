@@ -91,6 +91,16 @@ getDeclaredCOIGS(){
       return this.http.get(r_url);
 }
 
+getDeclaredCOILS(){
+  var r_url = this.sp_URL + "/_api/web/lists/getbytitle('COIHolding2025')/items?$select=ID,Title,Created,WorkflowStatus,Status,Author/Name,Created,Author/Id,"
+			+"QuestionA,QuestionB,QuestionC,QuestionD,QuestionE,QuestionF,QuestionG,QuestionH,QuestionAComment,QuestionBComment,QuestionCComment,QuestionDComment,QuestionEComment,QuestionFComment,QuestionGComment,QuestionHComment,"
+			+"EmployeeEmail,EmployeeName,ManagerEmail&$expand=Author"
+			+"&$filter=(OPCO eq 'Lifestyle') and ((QuestionB eq 'Yes') or (QuestionC eq 'Yes') or "
+			+"(QuestionD eq 'Yes') or (QuestionE eq 'Yes') or (QuestionF eq 'Yes') or "
+			+"(QuestionG eq 'Yes') or (QuestionH eq 'Yes')) and (Status ne 'Cancelled')&$top=50000";
+      return this.http.get(r_url);
+}
+
   getCOI(taskid:any){
     var request_url = this.sp_URL  + "/_api/web/lists/getByTitle('COIHolding2025')/items(" + taskid + ")?$select=*,Attachments,AttachmentFiles&$expand=AttachmentFiles";
     return this.http.get(request_url);
@@ -141,7 +151,6 @@ getDeclaredCOIGS(){
   return item;
 }
 async addAttachment(itemId: number, file: File, requestDigest: string) {
-  debugger;
   const url = `${this.sp_URL}/_api/web/lists/getbytitle('COIHolding2025')/items(${itemId})/AttachmentFiles/add(FileName='${file.name}')`;
   const headers = new HttpHeaders({
     'X-RequestDigest': requestDigest,
@@ -154,7 +163,6 @@ async addAttachment(itemId: number, file: File, requestDigest: string) {
 
 
 async UpdateCOI(Id:any,COIData:any,Attachments:any){
-  debugger;
   const requestDigest = await this.getRequestDigest();
   const processCOI = async () => {
      sp.web.lists.getByTitle("COIHolding2025").items.getById(Id).update(COIData);

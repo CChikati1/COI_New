@@ -70,6 +70,7 @@ export class TaskTrackComponent
     mycompletedtaskscols:boolean=false;
     mycompletedtaskscogs:boolean=false;
     mycompletedtasksstatusglobalsolutions:boolean=false;
+    mycompletedtasksstatusls:boolean=false;
     mycompletedtaskscoretail:boolean=false;
     mycompletedtasksstatusretail:boolean=false;
     spnmyrequests:string='0';
@@ -83,6 +84,7 @@ export class TaskTrackComponent
     spndeclaredcoi:string='0';
     spndeclaredcoiretail:string='0';
     spndeclaredcoigs:string='0';
+    spndeclaredcoils:string='0';
     constructor(private dialog: MatDialog, public router: Router, public service: ApiService, private fb: FormBuilder, private cd: ChangeDetectorRef
     ) {
 
@@ -147,6 +149,12 @@ export class TaskTrackComponent
                 this.mycompletedtasksstatusretail=true;
                 this.getAllCOICompletedData('Retail');
                 this.getDeclaredCOIRetail();
+
+                  //this.isUserMemberCOGS();
+                  this.mycompletedtaskscols = true;
+                  this.mycompletedtasksstatusls = true;
+                  this.getAllCOICompletedData('Lifestyle');
+                  this.getDeclaredCOILS();
 
                 this.getAllCOICount();
                 this.cd.detectChanges();
@@ -251,6 +259,7 @@ export class TaskTrackComponent
             });
         });
     }
+    print:boolean=false;
     myModalView: boolean = false;
     myModal: boolean = false;
     fn_resubmit() {
@@ -260,8 +269,16 @@ export class TaskTrackComponent
         this.readOnly = false;
         this.cd.detectChanges();
     }
+
+    fn_print(){
+        this.router.navigate(['/print',this.printTaskId]);
+        
+    }
+    printTaskId:any;
     viewCOI(taskId: any) {
+        this.printTaskId='';
         this.service.getCOI(taskId).subscribe(data => {
+            this.printTaskId=taskId;
             var rowData=data;
             this.readOnly = true;
             this.populateForm(rowData); // Pass row data to the form
@@ -278,7 +295,18 @@ export class TaskTrackComponent
         //     console.log(res);
         // });
     }
+    ResetComments(){
+        this.hideAttachments =true;
+        this.txtLMCommentsyes = false;
+        this.txtDHCommentsyes = false;
+        this.txtRACCommentsyes = false;
+        this.txtOPCOHCommentsyes = false;
+        this.txtOPCOCHCommentsyes = false;
+    }
+    hideAttachments:boolean =true;
     populateForm(data: any): void {
+       
+        this.ResetComments();
         // Populate simple key-value pairs
         this.form.patchValue({
             employeeDetails: {
@@ -289,7 +317,8 @@ export class TaskTrackComponent
                 MgrName: data.ManagerName,
                 MgrEmail: data.ManagerEmail,
                 Division: data.Division,
-                Company: data.Company
+                Company: data.Company,
+                OPCO:data.OPCO
             },
             comments: {
                 LMComments: data.ManagerComments && data.ManagerComments.trim() !== "" ? data.ManagerComments : "",
@@ -420,12 +449,41 @@ export class TaskTrackComponent
                 })
             );
         });
-        this.txtLMCommentsyes = !!data.ManagerComments && data.ManagerComments.trim() !== "";
-        this.txtDHCommentsyes = !!data.DHComments && data.DHComments.trim() !== "";
-        this.txtRACCommentsyes = !!data.RACComments && data.RACComments.trim() !== "";
-        this.txtOPCOHCommentsyes = !!data.OPCOHComments && data.OPCOHComments.trim() !== "";
-        this.txtOPCOCHCommentsyes = !!data.OPCOCHComments && data.OPCOCHComments.trim() !== "";
-
+        if(this.activeTab === 'home' && data.Status == 'Rejected'){
+            switch(data.Level){
+                case "LM":
+                    this.txtLMCommentsyes = !!data.ManagerComments && data.ManagerComments.trim() !== "";
+                    break;
+                
+                case "DH":
+                    this.txtDHCommentsyes = !!data.DHComments && data.DHComments.trim() !== "";
+                    
+                break;
+                case "OPCOH":
+                   
+                    this.txtOPCOHCommentsyes = !!data.OPCOHComments && data.OPCOHComments.trim() !== "";
+                    
+                break;
+                case "OPCOCH":
+                    this.txtOPCOCHCommentsyes = !!data.OPCOCHComments && data.OPCOCHComments.trim() !== "";
+                break;
+                case "RAC":
+                case "RACF":
+                    this.txtRACCommentsyes = !!data.RACComments && data.RACComments.trim() !== "";
+                break;
+                default:
+                    this.txtLMCommentsyes = !!data.ManagerComments && data.ManagerComments.trim() !== "";
+                break;
+            }
+        }
+        else
+        {
+        this.txtLMCommentsyes = false;
+        this.txtDHCommentsyes = false;
+        this.txtRACCommentsyes = false; 
+        this.txtOPCOHCommentsyes = false;
+        this.txtOPCOCHCommentsyes = false;
+        }
         // Update labels dynamically
         if (data.DHComments && data.DHComments.trim() !== "") {
             if (data.OPCO && data.OPCO === "Retail") {
@@ -444,7 +502,13 @@ export class TaskTrackComponent
         }
         this.attachments = [];
     if (data.Attachments) {
-      this.attachments = data.AttachmentFiles;
+        if(this.activeTab === 'home' && (data.Status !== 'Submitted' && data.Status !== 'Pending With Line Manager')){
+          this.hideAttachments=true;
+        }
+        else{
+            this.hideAttachments=false;
+        }
+        this.attachments = data.AttachmentFiles;
     }
 
     }
@@ -529,7 +593,8 @@ export class TaskTrackComponent
                 MgrName: [{ value: '', disabled: true }],
                 MgrEmail: [{ value: '', disabled: true }],
                 Division:[{ value: '', disabled: true }],
-                Company:[{ value: '', disabled: true }]
+                Company:[{ value: '', disabled: true }],
+                OPCO:[{ value: '', disabled: true }]
             }),
             comments: this.fb.group({
                 LMComments: [{ value: '', disabled: true }],
@@ -1298,12 +1363,12 @@ export class TaskTrackComponent
                         if (taskId) {
                             const selectedRow = dataset1.value.find((item: any) => item.ID === taskId);
                             if (selectedRow) {
-
-                                this.dialog.open(TaskApproveComponent, {
-                                    width: '90%', // Optional: Set modal width
-                                    height: '90%',
-                                    data: { id: taskId, row: selectedRow }, // Pass the TaskID to the modal component
-                                });
+                                this.router.navigate(['/coi', taskId]); 
+                                // this.dialog.open(TaskApproveComponent, {
+                                //     width: '90%', // Optional: Set modal width
+                                //     height: '90%',
+                                //     data: { id: taskId, row: selectedRow }, // Pass the TaskID to the modal component
+                                // });
                             }
                             else {
                                 console.error('Task invalid!');
@@ -1311,7 +1376,7 @@ export class TaskTrackComponent
                         } else {
                             console.error('TaskID is undefined or invalid!');
                         }
-                        // this.router.navigate(['/task-approve', taskId]);
+                         this.router.navigate(['/coi', taskId]);
                     });
                 });
             }
@@ -1399,6 +1464,16 @@ export class TaskTrackComponent
         this.getDeclaredCOIGS();
         this.cd.detectChanges();
     }
+
+    onLSDeclaredCOIClick(event: Event): void {
+        this.myModal = false;
+        this.readOnly = false;
+        this.setActiveTab('declaredCOILS');
+        event.preventDefault();
+        this.getDeclaredCOILS();
+        this.cd.detectChanges();
+    }
+   
 
     onSubmitCOIClick(event: Event): void {
         this.setActiveTab('home');
@@ -1521,7 +1596,14 @@ export class TaskTrackComponent
         });
     })
    }
-   
+   ongetCOIReports(event:any){
+    this.myModal = false;
+    this.readOnly = false;
+    this.setActiveTab('declaredCOIReport');
+    this.router.navigate(['/report']);
+    event.preventDefault();
+    this.cd.detectChanges();
+   }
 getAllCOICount(){
     this.service.getRecordCount().subscribe(res=>{
         var count=res as any;
@@ -1895,6 +1977,78 @@ getDeclaredCOIGS(){
             
        });
        $("#mytaskscompletedstatustblglobalsolutions tbody").on('click', '.anc_task', (event) => {
+        const rowData = $(event.currentTarget).closest('tr').data();
+        const taskId = $(event.currentTarget).data('task');
+
+        // Find the row data using taskId
+        const selectedRow = dataset1.value.find((item:any) => item.ID === taskId);
+        if (selectedRow) {
+            this.viewCOI(taskId);
+        }
+        
+    });
+    });
+    
+}
+
+
+getDeclaredCOILS(){
+    this.service.getDeclaredCOILS().subscribe((declaredcoigs:any)=>{
+        var dataset1 = declaredcoigs as any;
+        this.spndeclaredcoils = dataset1.value.length;
+        const table: any = $("#mytaskscompletedstatustblls");
+        table.DataTable({
+            destroy: true,"order": [[ 0, "desc" ]],
+            "aLengthMenu": [[20, 40, 60, -1], [20, 40, 60, "All"]],
+            "iDisplayLength": 20,
+            "data": dataset1.value,
+            "columns": [
+            {
+                "data": "ID","class": "hide",
+            },
+
+                { "data": "EmployeeName" },
+                { "data": "EmployeeEmail" },               
+                {
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) {
+                        if (e.Created != null) {
+                            return new Date(e.Created).toLocaleDateString();
+                        } else {
+                            return "";
+                        }
+                    }
+                },
+                   {
+                "orderable": false,
+                "data": null,
+                "defaultContent": '',
+                "render": function (e:any) {
+                   
+                           var status_html = "<span style='padding: 5px;background-color: #00a65a;color: #fff;font-weight: 600;border-radius: 15px;'>"+e.Status+"<span>";
+                                                    return status_html;
+
+                                        }
+            },
+
+                 
+                {
+                    "class": 'control',
+                    "orderable": false,
+                    "data": null,
+                    "defaultContent": '',
+                    "render": function (e:any) { 
+                        return '<a data-task="'+ e.Id +'" data-tab="others" class="anc_task">View</a>'; 
+                    
+                    }
+                },
+
+            ]
+            
+       });
+       $("#mytaskscompletedstatustblls tbody").on('click', '.anc_task', (event) => {
         const rowData = $(event.currentTarget).closest('tr').data();
         const taskId = $(event.currentTarget).data('task');
 

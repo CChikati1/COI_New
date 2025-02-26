@@ -1,15 +1,15 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import {  ChangeDetectorRef, Component, Inject, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router, RouterOutlet } from '@angular/router';
 import { ApiService } from '../api.service';
 import { FormArray, FormBuilder, FormGroup, FormsModule, Validators } from '@angular/forms';
 import { CommonModule, DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import $ from 'jquery';
 import 'datatables.net';
 import 'datatables.net-buttons';
 import 'datatables.net-responsive';
-import { MAT_DIALOG_DATA, MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatDialogModule } from '@angular/material/dialog'; //MAT_DIALOG_DATA, MatDialog, 
 import { provideAnimations } from '@angular/platform-browser/animations';
 import swal from 'sweetalert';
 import { environment } from '../../environments/environment';
@@ -25,6 +25,7 @@ import { environment } from '../../environments/environment';
   styleUrl: './task-approve.component.scss'
 })
 export class TaskApproveComponent implements OnInit {
+  @Input() id!: string; 
   taskId: string | null = null;
   form!: FormGroup;
   empForm!:FormGroup;
@@ -61,8 +62,13 @@ export class TaskApproveComponent implements OnInit {
       selectedLevel='';
       selectedApprover='';
       approvers:any;
-  constructor(private route: ActivatedRoute,@Inject(MAT_DIALOG_DATA) public data: any,public service: ApiService,
-  private dialogRef: MatDialog,private fb: FormBuilder,private cd: ChangeDetectorRef) {}
+  // constructor(private route: ActivatedRoute,@Inject(MAT_DIALOG_DATA) public data: any,public service: ApiService,
+  // private dialogRef: MatDialog,private fb: FormBuilder,private cd: ChangeDetectorRef) {}
+  constructor(private route: ActivatedRoute, private router: Router,private fb: FormBuilder,private cd: ChangeDetectorRef,
+    public service: ApiService,
+
+  ) {}
+
 
   ngOnInit(): void {
     
@@ -71,7 +77,7 @@ export class TaskApproveComponent implements OnInit {
     this.service.getUserName().subscribe(res => {
         if (res != null) {
             let user = res as any;
-            this.viewCOI(this.data.id);
+            this.viewCOI(this.id);
             this.cd.detectChanges();
             //this.getMytasksCOIData();
         }
@@ -87,7 +93,8 @@ this.empForm = this.fb.group({
   MgrName:[''],
   MgrEmail:[''],
   Division:[''],
-  Company:['']
+  Company:[''],
+  OPCO:['']
 })
 }
 CreateForm(): void {
@@ -206,7 +213,8 @@ populateEmpForm(data:any):void{
     MgrName:data.ManagerName,
     MgrEmail:data.ManagerEmail,
     Division:data.Division,
-    Company:data.Company
+    Company:data.Company,
+    OPCO:data.OPCO
   })
 }
 populateForm(data: any): void {
@@ -263,7 +271,7 @@ populateForm(data: any): void {
             this.txtDHCommentsyes = true;
                   if(data.OPCO != null && data.OPCO == "Retail")
             {
-              this.lblLevel2Text="HC Comments";
+              this.lblLevel2Text="HCBP Comments";
             }else{
               this.lblLevel2Text= "Department Head Comments";
             }
@@ -468,7 +476,7 @@ fn_submittoopco(){
                 managerstatus = "Approved by "+ this.furtherclarification +"";
             }
         }
-        var ItemID = this.data.id;
+        var ItemID = this.id;
         var item:any = {
                 'Status': reviewstatus,
                 'ManagerStatus':managerstatus,
@@ -509,8 +517,9 @@ fn_submittoopco(){
                     '',
                     'Request has been submitted successfully',
                     'success'
-                    ).then(function () {
-                      window.location.reload();
+                    ).then( ()=> {
+                      this.goBack();
+                      //window.location.reload();
                        // window.location.href = "https://mafportal.maf.ae/Compliance/SitePages/COIHolding.aspx";
                     });
             
@@ -581,7 +590,6 @@ file:any;
         }
       }
  fn_complete() {	
- debugger;
   if((this.level == "RAC" || this.level == "OPCOH" || this.level == "OPCOCH" || (this.opco == "Retail" && this.level == "DH")) && (this.txtComments =="" || this.txtComments == null)){
       swal('','Provide your feedback in the comments box','info');
       return
@@ -598,13 +606,14 @@ file:any;
       var workflowtrigger="Yes";
   
       if(this.level == "LM" && this.opco != "Retail"){
-          reviewstatus = "Pending With Department Head";
-          managerstatus = "Approved by line manager";
-          pendingwith = ""; //Check value for pending with
-          assignedTo = ""; //replace this with depthead
-          approverlevel = "DH";
-          stage ="Inprogress";
-          workflowtrigger="Yes";
+        reviewstatus = "Pending With Compliance";
+        managerstatus = "Approved by Line Manager";
+        pendingwith ="";// this.depthead; //Check value for pending with
+        assignedTo = ""; //replace this with depthead
+        approverlevel = "RAC";
+        stage ="Inprogress";
+        workflowtrigger="Yes";
+        cLevel = "Level3";
       }else{
           reviewstatus = "Pending With HC";
           managerstatus = "Approved by line manager";
@@ -616,16 +625,16 @@ file:any;
       }
       
 
-      if(this.level == "DH" && this.opco != "Retail"){
-          reviewstatus = "Pending With Compliance";
-          managerstatus = "Approved by Department Head";
-          pendingwith = this.depthead; //Check value for pending with
-          assignedTo = ""; //replace this with depthead
-          approverlevel = "RAC";
-          stage ="Inprogress";
-          workflowtrigger="Yes";
-          cLevel = "Level3";
-      }
+      // if(this.level == "DH" && this.opco != "Retail"){
+      //     reviewstatus = "Pending With Compliance";
+      //     managerstatus = "Approved by Department Head";
+      //     pendingwith = this.depthead; //Check value for pending with
+      //     assignedTo = ""; //replace this with depthead
+      //     approverlevel = "RAC";
+      //     stage ="Inprogress";
+      //     workflowtrigger="Yes";
+      //     cLevel = "Level3";
+      // }
       if(this.level == "DH" && this.opco == "Retail"){
           reviewstatus = "Pending With Compliance";
           managerstatus = "Approved by HC";
@@ -682,7 +691,7 @@ file:any;
               managerstatus = "Approved by "+ this.furtherclarification +"";
           }
       }
-      var ItemID = this.data.id;
+      var ItemID = this.id;
       var item:any = {
           'Status': reviewstatus,
           'ManagerStatus':managerstatus,
@@ -723,14 +732,18 @@ file:any;
                   '',
                   'Request has been submitted successfully',
                   'success'
-                  ).then(function () {
-                    window.location.reload();
+                  ).then( ()=> {
+                    this.goBack();
+                   // window.location.reload();
                      // window.location.href = "https://mafportal.maf.ae/Compliance/SitePages/COIHolding.aspx";
                   });
           
       }
  
   }
+}
+goBack():void {
+  this.router.navigate(['/']); // Navigate back to the task list
 }
 
 fn_reject() {
@@ -753,7 +766,7 @@ fn_reject() {
       if(this.level == "OPCOCH"){			
     managerstatus = "Rejected by OPCO Country head";			
   }
-      var ItemID = this.data.id;
+      var ItemID = this.id;
       //var update_url = "/_api/web/lists/GetByTitle('COIHolding2022')/items('" + ItemID + "')";
       var item:any = {
           'Status': 'Rejected',
@@ -795,8 +808,9 @@ fn_reject() {
                   '',
                   'Request has been rejected successfully',
                   'success'
-                  ).then(function () {
-                    window.location.reload();
+                  ).then( ()=> {
+                    this.goBack();
+                    //window.location.reload();
                      // window.location.href = "https://mafportal.maf.ae/Compliance/SitePages/COIHolding.aspx";
                   });
           }
@@ -905,7 +919,7 @@ get radio2hDetails() {
 }
 
   close(): void {
-    this.dialogRef.closeAll();
+   // this.dialogRef.closeAll();
   }
 }
 

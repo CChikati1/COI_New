@@ -17,7 +17,7 @@
 						<span id="spnmytasks">{{spnmytasks}}</span></sup></a>
 
 			</li>
-            
+
 
 			<li class="nav-item" id="mytasksceo" *ngIf="mytasksceo">
 				<a class="nav-link" id="mytasksceo-tab" [class.active]="activeTab === 'ceopending'"
@@ -27,9 +27,9 @@
 						style="font-size: 12px;">
 						<span id="spnmytasksceo">{{spnmytasksceo}}</span></sup></a>
 			</li>
-			<li class="nav-item" id="mycompletedtasksceo" *ngIf="mycompletedtasksceo" >
+			<li class="nav-item" id="mycompletedtasksceo" *ngIf="mycompletedtasksceo">
 				<a class="nav-link" id="mycompletedtasksceo-tab" [class.active]="activeTab === 'ceocompleted'"
-				href="javascript:void(0)" (click)="onCEOTasksCompletedClick($event)" role="tab"
+					href="javascript:void(0)" (click)="onCEOTasksCompletedClick($event)" role="tab"
 					aria-controls="profile" aria-selected="activeTab === 'ceocompleted'">
 					<i class="fa fa-tasks" aria-hidden="true"></i>&nbsp; CEO Completed Approvals<sup
 						style="font-size: 12px;">
@@ -37,63 +37,88 @@
 			</li>
 
 			<li class="nav-item" id="mycompletedtasksco" *ngIf="mycompletedtasksco">
-				<a class="nav-link" id="mycompletedtasksco-tab" [class.active]="activeTab === 'allcoicompleted'" 
-				href="javascript:void(0)" (click)="onAllcoiTasksCompletedClick($event)" role="tab"
+				<a class="nav-link" id="mycompletedtasksco-tab" [class.active]="activeTab === 'allcoicompleted'"
+					href="javascript:void(0)" (click)="onAllcoiTasksCompletedClick($event)" role="tab"
 					aria-controls="profile" aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompleted'"></i>&nbsp; All COI request<sup style="font-size: 12px;">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompleted'"></i>&nbsp; All COI request<sup
+						style="font-size: 12px;">
 						<span id="spnmytaskscompletedco">{{spnmytaskscompletedco}}</span></sup></a>
 			</li>
 
 			<li class="nav-item" id="mycompletedtaskscols" *ngIf="mycompletedtaskscols">
 				<a class="nav-link" id="mycompletedtasksco-tabls" [class.active]="activeTab === 'allcoicompletedls'"
-				(click)="onAllcoilsTasksCompletedClick($event)" role="tab" aria-controls="profile"
-				 aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedls'"></i>&nbsp; All COI request Lifestyle<sup style="font-size: 12px;">
-				<span id="spnmytaskscompletedcols">{{spnmytaskscompletedcols}}</span>
-				</sup></a>
+					(click)="onAllcoilsTasksCompletedClick($event)" role="tab" aria-controls="profile"
+					aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedls'"></i>&nbsp; All COI request
+					Lifestyle<sup style="font-size: 12px;">
+						<span id="spnmytaskscompletedcols">{{spnmytaskscompletedcols}}</span>
+					</sup></a>
 			</li>
 			<li class="nav-item" id="mycompletedtaskscogs" *ngIf="mycompletedtaskscogs">
-				<a class="nav-link" id="mycompletedtasksco-tabgs" [class.active]="activeTab === 'allcoicompletedgs'" 
-				(click)="onAllcoigsTasksCompletedClick($event)" role="tab" aria-controls="profile"
-				 aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedgs'"></i>&nbsp; All COI request Global Solutions<sup style="font-size: 12px;">
-				<span id="spnmytaskscompletedcogs">{{spnmytaskscompletedcogs}}</span>
-				</sup></a>
+				<a class="nav-link" id="mycompletedtasksco-tabgs" [class.active]="activeTab === 'allcoicompletedgs'"
+					(click)="onAllcoigsTasksCompletedClick($event)" role="tab" aria-controls="profile"
+					aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedgs'"></i>&nbsp; All COI request
+					Global Solutions<sup style="font-size: 12px;">
+						<span id="spnmytaskscompletedcogs">{{spnmytaskscompletedcogs}}</span>
+					</sup></a>
 			</li>
 			<li class="nav-item" id="mycompletedtaskscoretail" *ngIf="mycompletedtaskscoretail">
-				<a class="nav-link" id="mycompletedtasksco-tabretail" [class.active]="activeTab === 'allcoicompletedretail'"
-				(click)="onAllcoiretailTasksCompletedClick($event)" role="tab" aria-controls="profile"
-				 aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedretail'"></i>&nbsp; All COI request Retail<sup style="font-size: 12px;">
-				<span id="spnmytaskscompletedcoretail">{{spnmytaskscompletedcoretail}}</span>
-				</sup></a>
+				<a class="nav-link" id="mycompletedtasksco-tabretail"
+					[class.active]="activeTab === 'allcoicompletedretail'"
+					(click)="onAllcoiretailTasksCompletedClick($event)" role="tab" aria-controls="profile"
+					aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'allcoicompletedretail'"></i>&nbsp; All COI
+					request Retail<sup style="font-size: 12px;">
+						<span id="spnmytaskscompletedcoretail">{{spnmytaskscompletedcoretail}}</span>
+					</sup></a>
 			</li>
-	
+
 			<li class="nav-item" id="mycompletedtasksstatus" *ngIf="mycompletedtasksstatus">
 				<a class="nav-link" id="mycompletedtasksstatus-tab" [class.active]="activeTab === 'declaredCOI'"
-				(click)="onDeclaredCOIClick($event)"  role="tab" aria-controls="profile"
-				 aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOI'"></i>&nbsp; Declared COI<sup style="font-size: 12px;">
-				<span id="spndeclaredcoi">{{spndeclaredcoi}}</span></sup></a>
+					(click)="onDeclaredCOIClick($event)" role="tab" aria-controls="profile" aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOI'"></i>&nbsp; Declared COI<sup
+						style="font-size: 12px;">
+						<span id="spndeclaredcoi">{{spndeclaredcoi}}</span></sup></a>
 			</li>
 
 			<li class="nav-item" id="mycompletedtasksstatusretail" *ngIf="mycompletedtasksstatusretail">
-				<a class="nav-link" id="mycompletedtasksstatus-tabretail"
-				(click)="onRetailDeclaredCOIClick($event)" [class.active]="activeTab === 'declaredCOIretail'" role="tab" aria-controls="profile"
-				 aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOIretail'"></i>&nbsp; Declared COI Retail<sup style="font-size: 12px;">
-				<span id="spndeclaredcoiretail">{{spndeclaredcoiretail}}</span></sup></a>
+				<a class="nav-link" id="mycompletedtasksstatus-tabretail" (click)="onRetailDeclaredCOIClick($event)"
+					[class.active]="activeTab === 'declaredCOIretail'" role="tab" aria-controls="profile"
+					aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOIretail'"></i>&nbsp; Declared COI
+					Retail<sup style="font-size: 12px;">
+						<span id="spndeclaredcoiretail">{{spndeclaredcoiretail}}</span></sup></a>
 			</li>
 
-			<li class="nav-item " id="mycompletedtasksstatusglobalsolutions" *ngIf="mycompletedtasksstatusglobalsolutions">
-				<a class="nav-link" id="mycompletedtasksstatus-tabglobalsolutions" 
-				(click)="onGSDeclaredCOIClick($event)" [class.active]="activeTab === 'declaredCOIGS'" role="tab" aria-controls="profile"
-				 aria-selected="false">
-					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOIGS'"></i>&nbsp; Declared COI Global Solutions<sup style="font-size: 12px;">
-				<span id="spndeclaredcoigs">{{spndeclaredcoigs}}</span></sup></a>
+			<li class="nav-item " id="mycompletedtasksstatusglobalsolutions"
+				*ngIf="mycompletedtasksstatusglobalsolutions">
+				<a class="nav-link" id="mycompletedtasksstatus-tabglobalsolutions"
+					(click)="onGSDeclaredCOIClick($event)" [class.active]="activeTab === 'declaredCOIGS'" role="tab"
+					aria-controls="profile" aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOIGS'"></i>&nbsp; Declared COI Global
+					Solutions<sup style="font-size: 12px;">
+						<span id="spndeclaredcoigs">{{spndeclaredcoigs}}</span></sup></a>
 			</li>
 
-			
+			<li class="nav-item " id="mycompletedtasksstatusls" *ngIf="mycompletedtasksstatusls">
+				<a class="nav-link" id="mycompletedtasksstatus-tabls" (click)="onLSDeclaredCOIClick($event)"
+					[class.active]="activeTab === 'declaredCOILS'" role="tab" aria-controls="profile"
+					aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOILS'"></i>&nbsp; Declared COI Life
+					Style<sup style="font-size: 12px;">
+						<span id="spndeclaredcoils">{{spndeclaredcoils}}</span></sup></a>
+			</li>
+			<li class="nav-item " id="coiReports" >
+				<a class="nav-link" id="coiReportslink" (click)="ongetCOIReports($event)"
+					[class.active]="activeTab === 'declaredCOIReport'" role="tab" aria-controls="profile"
+					aria-selected="false">
+					<i class="fa fa-tasks" aria-hidden="activeTab === 'declaredCOILS'"></i>&nbsp; Declared COI Reports
+					<!-- <sup style="font-size: 12px;">
+						 <span id="spndeclaredcoils">{{spndeclaredcoils}}</span>
+					</sup>  -->
+				</a>
+			</li>
 
 
 		</ul>
@@ -120,8 +145,8 @@
 
 							<div class="callout-table">
 								<div class="table-responsive mt-3">
-									<table id="tblMycoi" class="table table-striped table-bordered"
-										cellspacing="0" width="100%">
+									<table id="tblMycoi" class="table table-striped table-bordered" cellspacing="0"
+										width="100%">
 										<thead>
 											<tr>
 
@@ -178,14 +203,13 @@
 				</div>
 			</div>
 
-			<div *ngIf="activeTab === 'ceopending'"  id="profileceo" role="tabpanel"
-				aria-labelledby="mytasks-tab">
+			<div *ngIf="activeTab === 'ceopending'" id="profileceo" role="tabpanel" aria-labelledby="mytasks-tab">
 				<div class="row">
 					<div class="col-md-12">
 						<div class="card p-2">
 							<div class="table-responsive">
 								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
-									 id="mytasksceotbl">
+									id="mytasksceotbl">
 									<thead>
 										<tr>
 
@@ -207,215 +231,254 @@
 			</div>
 
 
-			 <div *ngIf="activeTab === 'ceocompleted'" id="completed" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedceo">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'ceocompleted'" id="completed" role="tabpanel" aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedceo">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
 
 
-		<div *ngIf="activeTab === 'allcoicompleted'" id="completedco" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row" >
-				<div class="d-flex align-items-center ml-auto" style="margin-right: 30px; margin-top: 10px;">
-					<label class="card-text" style="margin-right: 10px;">Filter By Opco</label>
-					<select name="ddlopcoMaster" class="form-control w-auto" id="ddlopcoMaster" (change)="onOpcoChange($event)">
-						<option value="" disabled>Select OPCO</option>
-						<option value="Holding">Holding</option>
-						<option value="Global Solutions">Global Solutions</option>
-						<option value="Lifestyle">Lifestyle</option>
-						<option value="Retail">Retail</option>
-					</select>
-				</div>
-			</div><br/>					
-			<div class="row">
-				
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedcotbl">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'allcoicompleted'" id="completedco" role="tabpanel" aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="d-flex align-items-center ml-auto" style="margin-right: 30px; margin-top: 10px;">
+						<label class="card-text" style="margin-right: 10px;">Filter By Opco</label>
+						<select name="ddlopcoMaster" class="form-control w-auto" id="ddlopcoMaster"
+							(change)="onOpcoChange($event)">
+							<option value="" disabled>Select OPCO</option>
+							<option value="Holding">Holding</option>
+							<option value="Global Solutions">Global Solutions</option>
+							<option value="Lifestyle">Lifestyle</option>
+							<option value="Retail">Retail</option>
+						</select>
+					</div>
+				</div><br />
+				<div class="row">
+
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedcotbl">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
 
-		<div *ngIf="activeTab === 'allcoicompletedls'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblls">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'allcoicompletedls'" id="completedstatus" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustblls">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
-		<div *ngIf="activeTab === 'allcoicompletedgs'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblgs">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'allcoicompletedgs'" id="completedstatus" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustblgs">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
-		<div *ngIf="activeTab === 'allcoicompletedretail'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblretail">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'allcoicompletedretail'" id="completedstatus" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustblretail">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
-		<div *ngIf="activeTab === 'declaredCOI'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustbl">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'declaredCOI'" id="completedstatus" role="tabpanel" aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustbl">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
-		<div *ngIf="activeTab === 'declaredCOIretail'" id="completedstatusretail" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblretail">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'declaredCOIretail'" id="completedstatusretail" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustblretail">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
-		<div *ngIf="activeTab === 'declaredCOIGS'" id="completedstatusglobalsolutions" role="tabpanel" aria-labelledby="mytasks-tab">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="card p-2">
-						<div class="table-responsive">
-							<table class="table table-striped table-bordered " cellspacing="0" width="100%" style="background:white;" id="mytaskscompletedstatustblglobalsolutions">
-								<thead>
-									<tr>
-										<th class="no-sort sorting_desc hide">ID</th>
-										<th class="no-sort sorting">Employee Name</th>
-										<th class="no-sort sorting">Employee Email</th>
-										<th class="no-sort sorting desc">Requested on</th>
-										<th class="no-sort sorting">Status</th>
-										<th class="no-sort sorting">View</th>
-									</tr>
-								</thead>
-							</table>
+			<div *ngIf="activeTab === 'declaredCOIGS'" id="completedstatusglobalsolutions" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustblglobalsolutions">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
+
+							</div>
 
 						</div>
-
 					</div>
 				</div>
 			</div>
-		</div>
+			<div *ngIf="activeTab === 'declaredCOILS'" id="completedstatuslifestyle" role="tabpanel"
+				aria-labelledby="mytasks-tab">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="card p-2">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered " cellspacing="0" width="100%"
+									style="background:white;" id="mytaskscompletedstatustblls">
+									<thead>
+										<tr>
+											<th class="no-sort sorting_desc hide">ID</th>
+											<th class="no-sort sorting">Employee Name</th>
+											<th class="no-sort sorting">Employee Email</th>
+											<th class="no-sort sorting desc">Requested on</th>
+											<th class="no-sort sorting">Status</th>
+											<th class="no-sort sorting">View</th>
+										</tr>
+									</thead>
+								</table>
 
+							</div>
+
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
@@ -437,301 +500,387 @@
 
 							<div class="panel-body form-horizontal form-group">
 
-
-								<p style="margin-bottom:0cm;text-align:center;line-height:normal;background:white;">
-									<strong><span style="font-size:20px;color:#212529;">Conflict of Interest
-											Guidelines</span></strong>
-								</p>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<p><span
-										style='font-size:14px;line-height:107%;font-family:"Calibri",sans-serif;color:#212529;'>Conflict
-										of Interest (COI) refers to any situation where an employee&rsquo;s personal
-										interest might conflict with the interests of any entity comprising part of the
-										Majid Al Futtaim group of companies (such entity, the
-										&ldquo;<strong>Company</strong>&rdquo;, and such group, the
-										&ldquo;<strong>Group</strong>&rdquo;). This is an unwanted circumstance as it
-										may
-										improperly influence or could be seen as improperly influencing the
-										employee&rsquo;s
-										judgement, decisions, actions and commitment to act, at all times, in the best
-										interests of the Company and the Group. Such unwanted circumstances can also
-										negatively impact the Company&rsquo;s, and consequently, the Group&rsquo;s
-										reputation.</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">
-										The basic principle is that each employee must act in a way which does not and
-										will
-										not adversely affect the reputation, business interests or integrity of the
-										Company
-										or the Group.
-										The employee should not benefit directly or indirectly beyond what is provided
-										to
-										the employee in their employment package.
-									</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">
-										The objective of these guidelines is to ensure transparency by requiring all
-										employees to disclose any and all personal interests with any party having a
-										business relationship with the Group in order to take remedial actions when
-										needed.
-									</span></p>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Definitions</span></strong>
-								</p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Business
-											Partners&nbsp;</span></strong><span
-										style="font-size:14px;color:#212529;">refer
-										to companies having business relationships with and/or provide products and
-										services
-										to any Company within the Group.</span>
-								</p>
-								<!-- <span
-							 style="color:black;">&nbsp;</span><span style="font-size:14px;color:#212529;">and/or provides products and services to Majid Al Futtaim Holding or any of its Operating Companies including its subsidiaries<strong>.</strong></span> -->
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Employees</span></strong>
-									<span style="font-size:14px;color:#212529;">&nbsp;are defined as all persons who are
-										employed by any Company within the Group on a full-time, part-time, or contract
-										basis.</span>
-								</p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Family Members or
-											Relatives</span></strong><span
-										style="font-size:14px;color:#212529;">&nbsp;are
-										defined to include spouse, children, grandchildren, parents, grandparents,
-										brothers
-										and sisters (including half-brothers and half-sisters), brothers and
-										sisters-in-law,
-										parents-in-law, children-in-law, uncles, aunts and first cousins of the
-										employee. If
-										any interest is present in a relative or a family member, that interest will be
-										considered to be that of the employee.</span>
-								</p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">&nbsp;</span></strong>
-								</p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Scope&nbsp;</span></strong>
-								</p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">
-										This COI guidelines apply to all Employees and their Family Members in the UAE
-										and
-										all other countries where the Group operates or intends to operate.&nbsp;</span>
-								</p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Key Principles</span></strong>
-								</p>
-								<ul style="list-style-type: disc;">
-									<li style="list-style-type: disc;"><span style=" font-family:Calibri;">No senior
-											officers or Employees (or their Family Members or Relatives) shall derive
-											any
-											personal profit, gain or benefit, directly or indirectly, by reason of his
-											or
-											her employment with the Group.&nbsp;</span></li>
-									<li style="list-style-type: disc;"><span
-											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">Each
-											Employee shall identify and disclose to the Company any and all personal
-											interests which he or she (or their Family Members or Relatives), directly
-											or
-											indirectly, have with any Business Partner having a relationship with any
-											Company within the Group, including but not limited to contractors,
-											consultants,
-											suppliers, business partners and tenants.</span></li>
-									<li style="list-style-type: disc;"><span
-											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">Any
-											personal/romantic relationships with direct reports, line managers, any
-											other
-											Employees and/or a Business Partner which may be perceived as impairing or
-											adversely affecting an Employee’s judgement to make business decisions
-											objectively must be promptly disclosed for appropriate safeguards to be
-											introduced.</span></li>
-									<li style="list-style-type: disc;"><span
-											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">If
-											an Employee becomes aware of a potential conflict of interest situation, the
-											Employee should immediately notify his/her direct manager and the relevant
-											Company compliance team. Actions may be taken to remove the party from
-											further
-											participation in Majid Al Futtaim-related activities until the conflict of
-											interest is reviewed or a waiver granted and legal advice obtained.</span>
-									</li>
-									<li style="list-style-type: disc;"><span style="font-family:Calibri;">On an annual
-											basis
-											all Employees must complete the below Conflict of Interest Disclosure Form.
-											Employees shall immediately update and resubmit this form, if an
-											individual's
-											financial, business, or employment relationship changes throughout the year
+								<div>
+									<p style="margin-bottom:0cm;text-align:center;line-height:normal;background:white;">
+										<strong><span style="font-size:20px;color:#212529;">Conflict of Interest
+												Guidelines</span></strong>
+									</p>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<p><span
+											style='font-size:14px;line-height:107%;font-family:"Calibri",sans-serif;color:#212529;'>Conflict
+											of Interest (COI) refers to any situation where an employee&rsquo;s personal
+											interest might conflict with the interests of any entity comprising part of
+											the
+											Majid Al Futtaim group of companies (such entity, the
+											&ldquo;<strong>Company</strong>&rdquo;, and such group, the
+											&ldquo;<strong>Group</strong>&rdquo;). This is an unwanted circumstance as
+											it
+											may
+											improperly influence or could be seen as improperly influencing the
+											employee&rsquo;s
+											judgement, decisions, actions and commitment to act, at all times, in the
+											best
+											interests of the Company and the Group. Such unwanted circumstances can also
+											negatively impact the Company&rsquo;s, and consequently, the Group&rsquo;s
+											reputation.</span></p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">
+											The basic principle is that each employee must act in a way which does not
 											and
-											a conflict of interest could exist.</span></li>
-									<li style="list-style-type: disc;"><span
-											style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">All
-											conflict of interest disclosures shall be analysed by management and risk
-											mitigation actions be implemented to protect the Company and the concerned
-											Employee, where needed.</span></li>
-								</ul>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Gifts, Hospitality and
-											Entertainment</span></strong>
-								</p>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<ul style="list-style-type: disc;">
-									<li style="list-style-type: disc;"><span style="font-family:Calibri;">There are
-											situations involving an exchange of Gifts, Hospitality and Entertainment
-											(GHE),
-											which can be perceived as a conflict of interest. GHE must be carried out in
-											full compliance with Majid Al Futtaim&nbsp;</span>
-										<span style="color:black;">
-											<a
-												href="https://www.majidalfuttaim.com/-/media/feature/mafcorporate/about/policy/ghe-policyv21final.pdf"><span
-													style="font-family:Calibri;">GHE Policy</span></a>
-										</span><span style="font-family:Calibri;">.</span>
-									</li>
-									<li style="list-style-type: disc;"><span style="font-family:Calibri;">If you
-											haven&rsquo;t registered GHE received using the&nbsp;</span><span
-											style="color:black;"><a href="https://mafportal.maf.ae/portal/ghe">GHE
-												tool</a></span>
-										<span style="font-family:Calibri;">, please use the below Conflict of Interest
-											Disclosure Form to disclose them.</span>
-									</li>
-								</ul>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">&nbsp;</span></strong>
-								</p>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Examples of non-allowable gifts,
-											benefits or relationships</span></strong>
-								</p>
-								<ul type="disc">
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Cash
-											payments</span>
-									</li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Travel tickets
-											and/or
-											trips, both local and international</span></li>
-									<li style="list-style-type: disc;"><span
-											style="font-size:14px;">Accommodations</span>
-									</li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Vacations</span>
-									</li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Tickets to musical
-											or
-											sporting events (unless such tickets are provided to the Company as part of
-											a
-											sponsorship program by the Company)</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Lavish meals
-											exceeding
-											the limit specified below</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Heavily discounted
-											or
-											free products and services from any Business Partner</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Direct and indirect
-											sponsorship of social, philanthropist and sporting events for self, family
-											members and/or team</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Expensive
-											promotional
-											items (exceeding allowable monetary limit)</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Providing
-											consulting
-											services to any Business Partners&nbsp;</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Promise of future
-											employment by any Business Partner (for self or Family Members or
-											Relatives)</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Being a salaried
-											employee or receiving any form or compensation (monetary or otherwise) from
-											any
-											person or entity outside the Group</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Director or board
-											member position in a company that is in direct competition with any of the
-											Group
-											entities.</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Employment of
-											Family
-											Members or Relatives by any Business Partner</span></li>
-								</ul>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Potential conflict of interest
-											requiring special approval&nbsp;</span></strong>
-								</p>
-								<ul type="disc">
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Employment of
-											Family
-											Members or Relatives within the Group</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Serving on the
-											Board of
-											Directors or advisory committees of any company that is NOT in direct
-											competition with the Company or Group</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Personal investment
-											in
-											any Business Partner or companies in direct competition with any Group
-											entity</span></li>
-								</ul>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Samples of allowable gifts or
-											benefits:</span></strong>
-								</p>
-								<ul type="disc">
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Business meals (not
+											will
+											not adversely affect the reputation, business interests or integrity of the
+											Company
+											or the Group.
+											The employee should not benefit directly or indirectly beyond what is
+											provided
 											to
-											exceed AED 2,000 in total cumulative value per annum or the lower threshold
-											set
-											by your OpCo & country of operation from a single source)</span></li>
-									<li style="list-style-type: disc;"><span style="font-size:14px;">Promotional items
-											(not
-											to exceed AED 500 in total cumulative value per annum or the lower threshold
-											set
-											by your OpCo & country of operation from a single source)</span></li>
-								</ul>
-								<p style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:14px;color:#212529;">Compliance with the
-											Guidelines:</span></strong>
-								</p>
+											the employee in their employment package.
+										</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">
+											The objective of these guidelines is to ensure transparency by requiring all
+											employees to disclose any and all personal interests with any party having a
+											business relationship with the Group in order to take remedial actions when
+											needed.
+										</span>
+									</p>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Definitions</span></strong>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Business
+												Partners&nbsp;</span></strong><span
+											style="font-size:14px;color:#212529;">refer
+											to companies having business relationships with and/or provide products and
+											services
+											to any Company within the Group.</span>
+									</p>
+									<!-- <span
+							 style="color:black;">&nbsp;</span><span style="font-size:14px;color:#212529;">and/or provides products and services to Majid Al Futtaim Holding or any of its Operating Companies including its subsidiaries<strong>.</strong></span> -->
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Employees</span></strong>
+										<span style="font-size:14px;color:#212529;">&nbsp;are defined as all persons who
+											are
+											employed by any Company within the Group on a full-time, part-time, or
+											contract
+											basis.</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Family Members or
+												Relatives</span></strong><span
+											style="font-size:14px;color:#212529;">&nbsp;are
+											defined to include spouse, children, grandchildren, parents, grandparents,
+											brothers
+											and sisters (including half-brothers and half-sisters), brothers and
+											sisters-in-law,
+											parents-in-law, children-in-law, uncles, aunts and first cousins of the
+											employee. If
+											any interest is present in a relative or a family member, that interest will
+											be
+											considered to be that of the employee.</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">&nbsp;</span></strong>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Scope&nbsp;</span></strong>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">
+											This COI guidelines apply to all Employees and their Family Members in the
+											UAE
+											and
+											all other countries where the Group operates or intends to
+											operate.&nbsp;</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Key
+												Principles</span></strong>
+									</p>
+									<ul style="list-style-type: disc;">
+										<li style="list-style-type: disc;"><span style=" font-family:Calibri;">No senior
+												officers or Employees (or their Family Members or Relatives) shall
+												derive
+												any
+												personal profit, gain or benefit, directly or indirectly, by reason of
+												his
+												or
+												her employment with the Group.&nbsp;</span></li>
+										<li style="list-style-type: disc;"><span
+												style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">Each
+												Employee shall identify and disclose to the Company any and all personal
+												interests which he or she (or their Family Members or Relatives),
+												directly
+												or
+												indirectly, have with any Business Partner having a relationship with
+												any
+												Company within the Group, including but not limited to contractors,
+												consultants,
+												suppliers, business partners and tenants.</span></li>
+										<li style="list-style-type: disc;"><span
+												style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">Any
+												personal/romantic relationships with direct reports, line managers, any
+												other
+												Employees and/or a Business Partner which may be perceived as impairing
+												or
+												adversely affecting an Employee’s judgement to make business decisions
+												objectively must be promptly disclosed for appropriate safeguards to be
+												introduced.</span></li>
+										<li style="list-style-type: disc;"><span
+												style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">If
+												an Employee becomes aware of a potential conflict of interest situation,
+												the
+												Employee should immediately notify his/her direct manager and the
+												relevant
+												Company compliance team. Actions may be taken to remove the party from
+												further
+												participation in Majid Al Futtaim-related activities until the conflict
+												of
+												interest is reviewed or a waiver granted and legal advice
+												obtained.</span>
+										</li>
+										<li style="list-style-type: disc;"><span style="font-family:Calibri;">On an
+												annual
+												basis
+												all Employees must complete the below Conflict of Interest Disclosure
+												Form.
+												Employees shall immediately update and resubmit this form, if an
+												individual's
+												financial, business, or employment relationship changes throughout the
+												year
+												and
+												a conflict of interest could exist.</span></li>
+										<li style="list-style-type: disc;"><span
+												style="line-height:107%;font-family:Calibri;font-size:10.5pt;color:#212529;">All
+												conflict of interest disclosures shall be analysed by management and
+												risk
+												mitigation actions be implemented to protect the Company and the
+												concerned
+												Employee, where needed.</span></li>
+									</ul>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Gifts, Hospitality and
+												Entertainment</span></strong>
+									</p>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<ul style="list-style-type: disc;">
+										<li style="list-style-type: disc;"><span style="font-family:Calibri;">There are
+												situations involving an exchange of Gifts, Hospitality and Entertainment
+												(GHE),
+												which can be perceived as a conflict of interest. GHE must be carried
+												out in
+												full compliance with Majid Al Futtaim&nbsp;</span>
+											<span style="color:black;">
+												<a
+													href="https://www.majidalfuttaim.com/-/media/feature/mafcorporate/about/policy/ghe-policyv21final.pdf"><span
+														style="font-family:Calibri;">GHE Policy</span></a>
+											</span><span style="font-family:Calibri;">.</span>
+										</li>
+										<li style="list-style-type: disc;"><span style="font-family:Calibri;">If you
+												haven&rsquo;t registered GHE received using the&nbsp;</span><span
+												style="color:black;"><a href="https://mafportal.maf.ae/portal/ghe">GHE
+													tool</a></span>
+											<span style="font-family:Calibri;">, please use the below Conflict of
+												Interest
+												Disclosure Form to disclose them.</span>
+										</li>
+									</ul>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">&nbsp;</span></strong>
+									</p>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Examples of non-allowable
+												gifts,
+												benefits or relationships</span></strong>
+									</p>
+									<ul type="disc">
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Cash
+												payments</span>
+										</li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Travel tickets
+												and/or
+												trips, both local and international</span></li>
+										<li style="list-style-type: disc;"><span
+												style="font-size:14px;">Accommodations</span>
+										</li>
+										<li style="list-style-type: disc;"><span
+												style="font-size:14px;">Vacations</span>
+										</li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Tickets to
+												musical
+												or
+												sporting events (unless such tickets are provided to the Company as part
+												of
+												a
+												sponsorship program by the Company)</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Lavish meals
+												exceeding
+												the limit specified below</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Heavily
+												discounted
+												or
+												free products and services from any Business Partner</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Direct and
+												indirect
+												sponsorship of social, philanthropist and sporting events for self,
+												family
+												members and/or team</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Expensive
+												promotional
+												items (exceeding allowable monetary limit)</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Providing
+												consulting
+												services to any Business Partners&nbsp;</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Promise of
+												future
+												employment by any Business Partner (for self or Family Members or
+												Relatives)</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Being a
+												salaried
+												employee or receiving any form or compensation (monetary or otherwise)
+												from
+												any
+												person or entity outside the Group</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Director or
+												board
+												member position in a company that is in direct competition with any of
+												the
+												Group
+												entities.</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Employment of
+												Family
+												Members or Relatives by any Business Partner</span></li>
+									</ul>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Potential conflict of
+												interest
+												requiring special approval&nbsp;</span></strong>
+									</p>
+									<ul type="disc">
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Employment of
+												Family
+												Members or Relatives within the Group</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Serving on the
+												Board of
+												Directors or advisory committees of any company that is NOT in direct
+												competition with the Company or Group</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Personal
+												investment
+												in
+												any Business Partner or companies in direct competition with any Group
+												entity</span></li>
+									</ul>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Samples of allowable gifts
+												or
+												benefits:</span></strong>
+									</p>
+									<ul type="disc">
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Business meals
+												(not
+												to
+												exceed AED 2,000 in total cumulative value per annum or the lower
+												threshold
+												set
+												by your OpCo & country of operation from a single source)</span></li>
+										<li style="list-style-type: disc;"><span style="font-size:14px;">Promotional
+												items
+												(not
+												to exceed AED 500 in total cumulative value per annum or the lower
+												threshold
+												set
+												by your OpCo & country of operation from a single source)</span></li>
+									</ul>
+									<p
+										style="margin-bottom:0cm;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:14px;color:#212529;">Compliance with the
+												Guidelines:</span></strong>
+									</p>
 
-								<ul style="list-style-type: disc;">
-									<li style="list-style-type: disc;"><span style="font-family:Calibri;">
-											Compliance with the COI guidelines is mandatory. Employees are ultimately
-											accountable to fully disclose any potential or actual conflict of interest.
-											The
-											existence of any actual or potential conflict of interest is not a
-											violation by itself. Failure to timely disclose is considered a violation
-											and
-											could lead to disciplinary actions including termination.</span></li>
-								</ul>
-								<p><span style="font-size:14px;line-height:107%;color:#212529;">&nbsp;</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<span style="font-size:14px;color:#212529;">&nbsp;</span></p>
-								<p style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
-									<strong><span style="font-size:15px;color:#212529;">I declare that I have read and
-											fully
-											understood the contents of this document. I agree to the above guidelines
-											and
-											confirm that I will disclose all my relationships with any person or entity
-											that
-											has a business relationship with any Group entity, including, without
-											limitation, all gifts and benefits received from those parties (not
-											disclosed
-											through GHE tool) using the below Annual Conflict of Interest Disclosure
-											form.</span></strong>
-								</p>
-								<br />
-								<div class="btnAgree">
-									<label class="radio-inline" style="padding:5px;">
-										<input type="radio" formControlName="radioAgreement" value="Yes"> Yes
-									</label>
-									<label class="radio-inline" style="padding:5px;">
-										<input type="radio" formControlName="radioAgreement" value="No">No</label>
+									<ul style="list-style-type: disc;">
+										<li style="list-style-type: disc;"><span style="font-family:Calibri;">
+												Compliance with the COI guidelines is mandatory. Employees are
+												ultimately
+												accountable to fully disclose any potential or actual conflict of
+												interest.
+												The
+												existence of any actual or potential conflict of interest is not a
+												violation by itself. Failure to timely disclose is considered a
+												violation
+												and
+												could lead to disciplinary actions including termination.</span></li>
+									</ul>
+									<p><span style="font-size:14px;line-height:107%;color:#212529;">&nbsp;</span></p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<span style="font-size:14px;color:#212529;">&nbsp;</span>
+									</p>
+									<p
+										style="margin-bottom:7.5pt;text-align:justify;line-height:normal;background:white;">
+										<strong><span style="font-size:15px;color:#212529;">I declare that I have read
+												and
+												fully
+												understood the contents of this document. I agree to the above
+												guidelines
+												and
+												confirm that I will disclose all my relationships with any person or
+												entity
+												that
+												has a business relationship with any Group entity, including, without
+												limitation, all gifts and benefits received from those parties (not
+												disclosed
+												through GHE tool) using the below Annual Conflict of Interest Disclosure
+												form.</span></strong>
+									</p>
+									<br />
+									<div class="btnAgree">
+										<label class="radio-inline" style="padding:5px;">
+											<input type="radio" formControlName="radioAgreement" value="Yes"> Yes
+										</label>
+										<label class="radio-inline" style="padding:5px;">
+											<input type="radio" formControlName="radioAgreement" value="No">No</label>
+									</div>
+									<br />
+									<br />
 								</div>
-								<br />
-								<br />
 								<p style="margin-bottom:7.5pt;text-align:center;line-height:normal;background:white;">
 									<strong><span style="font-size:16px;color:#212529;">Annual Conflict of Interest
 											Disclosure Form</span></strong>
@@ -800,6 +949,11 @@
 												<input type="text" id="txtCompany" formControlName="Company"
 													class="form-control" style="height: 30px;" readonly />
 											</div>
+											<div class="col-md-4">
+												<b>OPCO</b>
+												<input type="text" id="txtOpco" formControlName="OPCO"
+													class="form-control" style="height: 30px;" readonly />
+											</div>
 										</div>
 									</div>
 									<br />
@@ -864,9 +1018,10 @@
 															<th>Remarks</th>
 														</tr>
 													</thead>
-													<tbody *ngFor="let detail of radio1bDetails.controls; let i = index" [formGroupName]="i">
-														<tr> 
-															
+													<tbody *ngFor="let detail of radio1bDetails.controls; let i = index"
+														[formGroupName]="i">
+														<tr>
+
 															<td><input type="text" formControlName="qbname"
 																	class="form-control" [readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qbrelation"
@@ -875,12 +1030,12 @@
 																	class="form-control" [readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qbdate"
 																	class="form-control" [readonly]="readOnly">
-																	<div class="error" *ngIf="detail.get('qbdate')?.invalid && detail.get('qbdate')?.touched">
+																<!-- <div class="error" *ngIf="detail.get('qbdate')?.invalid && detail.get('qbdate')?.touched">
 																		<span *ngIf="detail.get('qbdate')?.errors?.['required']">Date is required.</span>
 																		<span *ngIf="detail.get('qbdate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
 																		<span *ngIf="detail.get('qbdate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
-																	  </div>
-																	</td>
+																	  </div> -->
+															</td>
 															<td><input type="text" formControlName="qbvalue"
 																	class="form-control" [readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qbremarks"
@@ -888,14 +1043,21 @@
 															<td><button type="button" (click)="removeRowqb(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
-														<tr *ngIf="detail.get('qbdate')?.invalid && detail.get('qbdate')?.touched">
+														<tr
+															*ngIf="detail.get('qbdate')?.invalid && detail.get('qbdate')?.touched">
 															<td colspan="6" class="error">
-																<span *ngIf="detail.get('qbdate')?.errors?.['required']">Date is required.</span>
-																<span *ngIf="detail.get('qbdate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
-																<span *ngIf="detail.get('qbdate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+																<span
+																	*ngIf="detail.get('qbdate')?.errors?.['required']">Date
+																	is required.</span>
+																<span
+																	*ngIf="detail.get('qbdate')?.errors?.['invalidDateFormat']">Invalid
+																	date format. Use DD/MM/YYYY.</span>
+																<span
+																	*ngIf="detail.get('qbdate')?.errors?.['invalidDate']">Invalid
+																	date. Please enter a real date.</span>
 															</td>
-														  </tr>
-														
+														</tr>
+
 													</tbody>
 												</table>
 												<button type="button" (click)="addRowqb()" *ngIf="!readOnly">Add
@@ -951,20 +1113,27 @@
 															<td><input type="text" formControlName="qccomprelation">
 															</td>
 															<td><input type="text" formControlName="qcdate">
-																
+
 															</td>
 															<td><input type="text" formControlName="qcclarifictaion">
 															</td>
 															<td><button type="button" (click)="removeRowqc(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
-														<tr *ngIf="detail.get('qcdate')?.invalid && detail.get('qcdate')?.touched">
+														<tr
+															*ngIf="detail.get('qcdate')?.invalid && detail.get('qcdate')?.touched">
 															<td colspan="6" class="error">
-															  <span *ngIf="detail.get('qcdate')?.errors?.['required']">Date is required.</span>
-															  <span *ngIf="detail.get('qcdate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
-															  <span *ngIf="detail.get('qcdate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+																<span
+																	*ngIf="detail.get('qcdate')?.errors?.['required']">Date
+																	in which relation started is required.</span>
+																<span
+																	*ngIf="detail.get('qcdate')?.errors?.['invalidDateFormat']">Invalid
+																	date format. Use DD/MM/YYYY.</span>
+																<span
+																	*ngIf="detail.get('qcdate')?.errors?.['invalidDate']">Invalid
+																	date. Please enter a real date.</span>
 															</td>
-														  </tr>
+														</tr>
 													</tbody>
 												</table>
 												<button type="button" (click)="addRowqc()" *ngIf="!readOnly">Add
@@ -1012,19 +1181,26 @@
 															<td><input type="text" formControlName="qdcomprelation">
 															</td>
 															<td><input type="text" formControlName="qddate">
-																
+
 															</td>
 															<td><input type="text" formControlName="qddetails"></td>
 															<td><button type="button" (click)="removeRowqd(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
-														<tr *ngIf="detail.get('qddate')?.invalid && detail.get('qddate')?.touched">
+														<tr
+															*ngIf="detail.get('qddate')?.invalid && detail.get('qddate')?.touched">
 															<td colspan="6" class="error">
-															  <span *ngIf="detail.get('qddate')?.errors?.['required']">Date is required.</span>
-															  <span *ngIf="detail.get('qddate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
-															  <span *ngIf="detail.get('qddate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+																<span
+																	*ngIf="detail.get('qddate')?.errors?.['required']">Date
+																	in which your relation started is required.</span>
+																<span
+																	*ngIf="detail.get('qddate')?.errors?.['invalidDateFormat']">Invalid
+																	date format. Use DD/MM/YYYY.</span>
+																<span
+																	*ngIf="detail.get('qddate')?.errors?.['invalidDate']">Invalid
+																	date. Please enter a real date.</span>
 															</td>
-														  </tr>
+														</tr>
 													</tbody>
 
 
@@ -1083,8 +1259,8 @@
 																	[readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qedate"
 																	[readonly]="readOnly">
-																	
-																	</td>
+
+															</td>
 															<td><input type="text" formControlName="qevalue"
 																	[readonly]="readOnly"></td>
 															<td><input type="text" formControlName="qeremarks"
@@ -1092,13 +1268,20 @@
 															<td><button type="button" (click)="removeRowqe(i)"
 																	*ngIf="!readOnly">Remove</button></td>
 														</tr>
-														<tr *ngIf="detail.get('qedate')?.invalid && detail.get('qedate')?.touched">
+														<tr
+															*ngIf="detail.get('qedate')?.invalid && detail.get('qedate')?.touched">
 															<td colspan="6" class="error">
-															  <span *ngIf="detail.get('qedate')?.errors?.['required']">Date is required.</span>
-															  <span *ngIf="detail.get('qedate')?.errors?.['invalidDateFormat']">Invalid date format. Use DD/MM/YYYY.</span>
-															  <span *ngIf="detail.get('qedate')?.errors?.['invalidDate']">Invalid date. Please enter a real date.</span>
+																<span
+																	*ngIf="detail.get('qedate')?.errors?.['required']">Date
+																	is required.</span>
+																<span
+																	*ngIf="detail.get('qedate')?.errors?.['invalidDateFormat']">Invalid
+																	date format. Use DD/MM/YYYY.</span>
+																<span
+																	*ngIf="detail.get('qedate')?.errors?.['invalidDate']">Invalid
+																	date. Please enter a real date.</span>
 															</td>
-														  </tr>
+														</tr>
 													</tbody>
 												</table>
 												<button type="button" (click)="addRowqe()" *ngIf="!readOnly">Add
@@ -1154,6 +1337,20 @@
 																	[readonly]="readOnly"></td>
 															<td><button type="button" (click)="removeRowqf(i)"
 																	*ngIf="!readOnly">Remove</button></td>
+														</tr>
+														<tr
+															*ngIf="detail.get('qfdate')?.invalid && detail.get('qfdate')?.touched">
+															<td colspan="6" class="error">
+																<span
+																	*ngIf="detail.get('qfdate')?.errors?.['required']">Date
+																	is required.</span>
+																<span
+																	*ngIf="detail.get('qfdate')?.errors?.['invalidDateFormat']">Invalid
+																	date format. Use DD/MM/YYYY.</span>
+																<span
+																	*ngIf="detail.get('qfdate')?.errors?.['invalidDate']">Invalid
+																	date. Please enter a real date.</span>
+															</td>
 														</tr>
 
 													</tbody>
@@ -1246,7 +1443,7 @@
 
 									</div>
 									<br />
-									<div formGroupName="comments" class="row"
+									<div formGroupName="comments" class="row" 
 										style="border: 1px solid #ccc!important; border-radius: 4px; " *ngIf="readOnly">
 										<div class="col-md-12 comments" *ngIf="txtLMCommentsyes">
 											<label class="labelComments">Line Manager Comments</label>
@@ -1269,12 +1466,14 @@
 										</div>
 										<div class="col-md-12 comments" *ngIf=" txtOPCOHCommentsyes">
 											<label class="labelComments" id="lblLevel3"> {{ lblLevel3Text }}</label>
+											<!-- <label class="labelComments" id="lblLevel3"> OPCO Head Comments</label> -->
 											<textarea id="txtOPCOHComments1" name="txtOPCOHComments"
 												formControlName="OPCOHComments" class="txtOPCOHComments clstxtComments"
 												rows="5" readonly></textarea>
 										</div>
 										<div class="col-md-12 comments" *ngIf=" txtOPCOCHCommentsyes">
 											<label class="labelComments" id="lblLevel4">{{ lblLevel4Text}} </label>
+											<!-- <label class="labelComments" id="lblLevel3"> OPCO Country Head Comments</label> -->
 											<textarea name="txtOPCOCHComments" formControlName="OPCOCHComments"
 												class="txtOPCOCHComments clstxtComments" rows="5" readonly></textarea>
 										</div>
@@ -1292,7 +1491,7 @@
 
 										</div>
 									</div>
-									<div class="row" *ngIf="readOnly">
+									<div class="row" *ngIf="readOnly && !hideAttachments">
 										<div class="col-md-6 col-lg-6">
 											<label class="card-text">Uploaded Documents</label>
 
@@ -1320,8 +1519,11 @@
 									<div class="col-md-6">
 										<input type="button" class="btnsubmit close" data-dismiss="modal"
 											(click)="closeModal()" value="Close" />
-										<input type="button" class="btnsubmit" *ngIf="readOnly && activeTab === 'home'" id="btnResubmit"
-											value="Re-submit the new COI" (click)="fn_resubmit()" />
+										<input type="button" class="btnsubmit" *ngIf="readOnly && activeTab === 'home'"
+											id="btnResubmit" value="Re-submit the new COI" (click)="fn_resubmit()" />
+										<input type="button" class="btnprint btnsubmit"
+											*ngIf="readOnly && activeTab !== 'home'" value="Print PDF"
+											(click)="fn_print()" />
 										<input type="submit" *ngIf="!readOnly" value="Submit" class="btnsubmit" />
 										<!-- <input type="button" class="btnsubmit" value="Submit" onclick="fn_submit()" /> -->
 									</div>
@@ -1336,5 +1538,6 @@
 
 		</div>
 	</div>
+	
 	<router-outlet></router-outlet>
 </div>

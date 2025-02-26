@@ -1,0 +1,49 @@
+<div class="tab-content" id="myTabContent">
+	<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+		<!-- <div class="card p-2"> -->
+			<div class="row">
+				<div class="col-md-12">
+					<div class="card card-default card-demo" id="cardDemo1">
+						<div class="card-body">
+							<div class="row mb-3">
+								<div class="col-md-4 col-lg-4">
+									<label class="card-text">OPCO <span style="color:red;">*</span></label>
+									<select class="form-control isreadyonlyfield"
+										style="width:100%" name="OPCO" id="optOPCO">
+										<option value="">Please Select</option>
+										<!-- <option value="All">All</option>
+										<option value="Global Solutions">Global Solutions</option>
+										<option value="Holding">Holding</option>
+										<option value="Lifestyle">Lifestyle</option>
+										<option value="Retail">Retail</option>
+										<option value="Xsight Future Solution">Xsight Future Solution</option>  -->
+									</select>
+									<!-- <span class="error">OpCo is required</span> -->
+								</div>
+								<div class="col-md-4 col-lg-4">
+									<label class="card-text">Date Range <span
+										style="color:red;">*</span> </label>
+                                        <input #reportrange type="text" readonly class="form-control" />
+									<!-- <div id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+										<i class="fa fa-calendar"></i>&nbsp;
+										<span></span> <i class="fa fa-caret-down"></i>
+									</div>                         -->
+								</div>
+							</div>
+							<div class="row mb-3">
+								<div class="col-md-6">
+								</div>
+								<div class="col-md-6">
+									<input type="button" class="btnsubmit close" data-dismiss="modal" value="Close" (click)="goBack()" />
+									<input type="button" class="btnsubmit" value="Submit" (click)="fn_submit()" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- </div> -->
+	</div>
+</div>
+
+<button class="coibutton" (click)="goBack()">Back to COI</button>

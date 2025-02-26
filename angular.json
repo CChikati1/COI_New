@@ -34,45 +34,23 @@
             ],
 			
             "styles": [
-              
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-													   
-			 
-															 
-															   
-																		 
-																		   
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
-															  
-												   
-			  
               "node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css",
+              "node_modules/daterangepicker/daterangepicker.css",
               "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
-																							
               "src/styles.scss"
             ],
             "scripts": [
-				
-			   
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/moment/min/moment.min.js",
+              "node_modules/daterangepicker/daterangepicker.js",
               "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
-																		 
-																		
-																		
-																		
-														
-																		   
               "node_modules/datatables.net-responsive/js/dataTables.responsive.js",
               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
-																	
-		  
-				
             ]
-			
-			
-			
           },
           "configurations": {
             "production": {
@@ -137,6 +115,7 @@
               "node_modules/datatables.net-dt/css/jquery.dataTables.css",
               "node_modules/datatables.net-buttons-dt/css/buttons.dataTables.css",
               "node_modules/datatables.net-responsive-dt/css/responsive.dataTables.css",
+              "node_modules/daterangepicker/daterangepicker.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
@@ -144,6 +123,8 @@
 
               "node_modules/jquery/dist/jquery.js",
               "node_modules/datatables.net/js/jquery.dataTables.js",
+              "node_modules/moment/min/moment.min.js",
+              "node_modules/daterangepicker/daterangepicker.js",
               "node_modules/datatables.net-buttons/js/dataTables.buttons.js",
               "node_modules/datatables.net-responsive/js/dataTables.responsive.js"
 																	  
